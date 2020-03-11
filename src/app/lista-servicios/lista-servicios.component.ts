@@ -102,7 +102,10 @@ export class ListaServiciosComponent {
             {
               case  "INX":
                 //Ejecuta las validaciones y flujo para Interacciones
-                this.consultaInterconecciones(strFolio);
+                if(this.esNumero(strFolio))
+                  this.consultaInterconecciones(strFolio);
+                else
+                  this.consultaServicios(strFolio);
               break;
               case  "CMP":
                 //Ejecuta las validaciones y flujo para Compartición
@@ -211,8 +214,6 @@ public consultaServicios(referencias:string)
 public consultaInterconecciones(pNumeroTelefonico:string)
 {
  console.log("Que llego " + pNumeroTelefonico)
-  if(this.esNumero(pNumeroTelefonico))
-  {
     let parametros = new HttpParams()
       .set("cuc",this.variables.getCUC())
       .set("numero",pNumeroTelefonico);
@@ -220,11 +221,7 @@ public consultaInterconecciones(pNumeroTelefonico:string)
     this.serviciohttp.consultaInterconeccion(parametros)
       .subscribe(  Respuesta =>{ this.evaluaRespConsultaInterconeccion (Respuesta); });
       
-  }
-  else{
-    this.variables.muestraBarra("Para buscar una interconexión debes introducir el número teléfonico", "ERROR");
-  }
-
+  
 }
 
 /**************************************************************************************  
