@@ -309,7 +309,7 @@ console.log (data);
   if(validacion=="Si")
     {
         referencias =   [{
-             referencia:"TNT"+ data["noNal"] ,
+             referencia:"TNT"+ "-" + data["noNal"] ,
              CUCEmpresarial: this.variables.getCUC(),
              cliente:data["empresa"]   ,
              folio: "" ,
@@ -324,7 +324,7 @@ console.log (data);
     console.log("Enmtar en el no " ) ;
     console.log(pFormulario)
         referencias = [{
-          referencia:pFormulario.value["Tipo"] + data["noNal"] ,
+          referencia:pFormulario.value["Tipo"] + "-" + data["noNal"] ,
           CUCEmpresarial: this.variables.getCUC(),
           cliente:data["empresa"]   ,
           folio: "" ,

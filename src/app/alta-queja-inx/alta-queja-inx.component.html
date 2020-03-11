@@ -28,14 +28,11 @@
                     <mat-form-field class="example-full-width" style="width: 95%;">
                         <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()">           
                     </mat-form-field>
-                    <div *ngIf="IpOrigen.invalid" class="validadorerror"><span>IP Origen/OPC es <strong>Requerido</strong></span></div>
-                 </td>
                  <td> <mat-label>IP Destino/OPC</mat-label></td>
                  <td>
                         <mat-form-field class="example-full-width" style="width: 95%;">  
                             <input matInput #txtIpDestino  formControlName="IpDestino" (blur)="buscaIpDestino()">           
                         </mat-form-field>
-                    <div *ngIf="IpDestino.invalid" class="validadorerror"><span>IP Destino/OPC es <strong>Requerido</strong></span></div>
                  </td>
             </tr>
             <tr>

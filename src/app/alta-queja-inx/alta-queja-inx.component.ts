@@ -122,9 +122,9 @@ CaracteristicaDet:any;
         Observaciones   : new FormControl('' ),
         Caracteristica  : new FormControl('' ),
         FolioCliente    : new FormControl('', [Validators.required]),
-        IpOrigen        : new FormControl('', [Validators.required]),
-        IpDestino       : new FormControl('', [Validators.required]),
-        CentralOrigen   : new FormControl('',),
+        IpOrigen        : new FormControl('' ),
+        IpDestino       : new FormControl('' ),
+        CentralOrigen   : new FormControl('' ),
         CentralDestino  : new FormControl('',),
         CIC             : new FormControl('',)
 
@@ -241,8 +241,8 @@ console.log (this.generarCadenaFallas());
                       +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<Origen1>"+this.variables.getOrigen()+"</Origen1>"
                       +"<Destino1>"+this.variables.getDestino()+"</Destino1>"
-                      +"<Origen2>3</Origen2>"
-                      +"<Destino2>4</Destino2>"
+                      +"<Origen2></Origen2>"
+                      +"<Destino2></Destino2>"
                       +"<IPOrigen>"+this.variables.getipOrigen()+"</IPOrigen>"
                       +"<IPDestino>"+this.variables.getipDestino()+"</IPDestino>"
                       +"<TDD-IDO>"+this.variables.getIDO()+"</TDD-IDO>"
