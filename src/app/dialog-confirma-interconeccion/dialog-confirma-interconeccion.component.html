@@ -1,0 +1,31 @@
+<div class="mat-elevation-z8" aling="center">
+    <table style="width: 100%;" >
+    <tr>
+        <td >
+            <div class="divcabecera"><label class="lblcabecera">Confirmación</label></div> 
+         </td>
+    </tr>
+    <table style="width: 100%;" >
+    <tr>
+        <td colspan="2">
+            El número {{ dataInterconeccion["noNal"] }} no existe en nuestra lista de servicios 
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="Center">
+                ¿Deseas Agregarlo?
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="1" align="Center">
+           <button mat-raised-button class="buttons" [mat-dialog-close]="true">Si</button>
+        </td>
+        <td colspan="2">
+            <button mat-raised-button class="buttons" (click)="cerrarDialog()">No</button>
+        </td>
+    </tr>
+</table>
+</table>
+
+

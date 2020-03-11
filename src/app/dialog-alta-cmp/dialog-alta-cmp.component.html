@@ -1,0 +1,68 @@
+<div class="mat-elevation-z8" aling="justify"> 
+        <div  [formGroup]="FormularioAlta"><!--(ngSubmit)="enviarForm()" > --> 
+		<table  style="width: 100%;" >
+		<tr>
+			<td >
+				<div class="divcabecera"><label class="lblcabecera">Datos de Servicio de Compartición</label></div> 
+			 </td>
+        </tr>
+        <table  style="width: 100%;" >
+            <tr>
+                <td> <mat-label>Identificador NIS</mat-label></td>
+                <td>
+                    <mat-form-field style="width: 90%;">
+                        <input matInput #txtIdNis type="text" formControlName="IdNis" name ="txtIdNis" required>
+                   </mat-form-field>
+                   <div *ngIf="IdNis.invalid" class="validadorerror"><span>Identificador NIS es <strong>Requerido</strong></span></div>
+                 </td>
+                 <td> <mat-label>Geolocalización Latitud</mat-label></td>
+                 <td>
+                    <mat-form-field style="width: 90%;">
+                        <input matInput #txtGeoLatitud type="text" formControlName="GeoLatitud" name ="txtGeoLatitud" required>  
+                   </mat-form-field>
+                   <div *ngIf="GeoLatitud.invalid" class="validadorerror"><span>Geolocalización Latitud es <strong>Requerido</strong></span></div>
+                 </td>
+            </tr>
+            <tr>
+                    <td> <mat-label>Tipo de Elemento</mat-label></td>
+                    <td>
+                    <mat-form-field style="width: 90%;" > 
+                        <mat-select #lselTipoElemento formControlName="TipoElemento" required>
+                            <mat-option value="Pozo">Pozo</mat-option>
+                            <mat-option value="Poste">Poste</mat-option>
+                            <mat-option value="Canalizacion">Canalizacion</mat-option>
+                        </mat-select>
+                     </mat-form-field>
+                  <div *ngIf="TipoElemento.invalid" class="validadorerror"><span>Tipo de Elemento es <strong>Requerido</strong></span></div>  
+                     </td>
+
+                     <td> <mat-label>Geolocalización Longitud</mat-label></td>
+                   <td>
+                    <mat-form-field style="width: 90%;">
+                        <input matInput #txtGeoLongitud type="text" formControlName="GeoLongitud" name ="txtGeoLongitud" required>  
+                   </mat-form-field>
+                   <div *ngIf="GeoLongitud.invalid" class="validadorerror"><span>Geolocalización Longitud es <strong>Requerido</strong></span></div>
+                 </td>
+            </tr>
+            <tr>
+                <td> <mat-label>Identificador de Elemento</mat-label></td>
+                <td>
+                    <mat-form-field style="width: 90%;">
+                        <input matInput #txtIdElemento type="text" formControlName="IdElemento" name ="txtIdElemento" required>  
+                   </mat-form-field>
+                   <div *ngIf="IdElemento.invalid" class="validadorerror"><span>Identificador de Elemento es <strong>Requerido</strong></span></div>
+                </td>
+                <td>
+                    <button mat-raised-button class="buttons" [disabled]="FormularioAlta.invalid" (click)="validarServicio()">Validar Servicio</button>
+                </td>
+                <td colspan="2"  align="Center">
+                    <button mat-raised-button class="buttons" (click)="cerrarDialog()" >Cancelar</button>
+                </td>
+            </tr>
+                
+            
+				</table>  
+			</table>  
+        
+    </div> <!--Aqui es el fin del fomulario-->
+</div>

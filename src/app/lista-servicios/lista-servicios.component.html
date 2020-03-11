@@ -1,0 +1,102 @@
+<table >
+  <tr>
+    <td colspan="3">
+      <br />
+    </td>
+  </tr>
+   <tr>
+    <td  width="50%" >   
+      <mat-form-field class="example-form-field" style="width: 80%;">
+        <input #txtreferencia matInput type="text" placeholder="Referencia"   class="txtReferencia">
+        <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="limpiaReferencia(txtreferencia)"  >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      
+     </td>
+
+    <td  width="40%" align="center" >      
+            <mat-label>Archivo seleccionado : {{strArchivo}}</mat-label>
+    </td>
+    <td width="10%">
+    
+        <div  >
+            <label for="Referencias" class="buttonFile">Archivo</label>
+            <div style="visibility: collapse;">
+                <input type="file" name="referencias" id="Referencias" (change)="agregaArchivo($event)" accept=".csv" />
+            </div>
+         </div>
+    </td>
+</tr>
+
+<tr >
+    <td align="center" >
+        <button mat-raised-button (click)="ejecutaBusqueda(txtreferencia.value)" class="buttons" [disabled]="disabled_btnBuscar" >Buscar</button>
+       
+      </td>
+    <td >
+        <button mat-raised-button class="buttons" (click)="limpiaPantalla(txtreferencia)" >Limpiar</button>
+    </td>
+  
+</tr>
+<tr  >
+    <td colspan="3" align="center">
+     
+      <div class="divLoad"  *ngIf="visibleLoad"> <img [src]="'assets/img/load.gif'" class="divLoad" ></div>   
+     
+      <div  class="mat-elevation-z8" >
+          <table id="GridBusquedaRef" mat-table [dataSource]="dataSource"  width="100%"  *ngIf="!visibleLoad" >
+                <!-- Referencia Column -->
+                <ng-container matColumnDef="Referencia">
+                  <th mat-header-cell *matHeaderCellDef> Servicio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.referencia}} </td>
+                </ng-container>
+                <!-- Familia Column -->
+                <ng-container matColumnDef="Familia">
+                  <th mat-header-cell *matHeaderCellDef> Familia </th>
+                  <td mat-cell *matCellDef="let element"> {{element.familia}} </td>
+                </ng-container>      
+                 <!-- puntas Column -->
+                 <ng-container matColumnDef="Puntas">
+                    <th mat-header-cell *matHeaderCellDef> Puntas A /Punta B </th>
+                    <td mat-cell *matCellDef="let element"> {{element.puntas}} </td>
+                </ng-container>
+                 
+                <!-- domicilio Column -->
+                <ng-container matColumnDef="Domicilio">
+                    <th mat-header-cell *matHeaderCellDef> Domicilio A/Domicilio B</th>
+                    <td mat-cell *matCellDef="let element"> {{element.domicilio}} </td>
+                </ng-container>
+                <!-- Empresa Column -->
+                <ng-container matColumnDef="Empresa">
+                    <th mat-header-cell *matHeaderCellDef> Empresa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
+                </ng-container>
+
+                <!-- CUC Column -->
+                <ng-container matColumnDef="CUC">
+                    <th mat-header-cell *matHeaderCellDef style="display:none;"> CUC </th>
+                    <td mat-cell *matCellDef="let element" style="display:none;"> {{element.CUCEmpresarial}} </td>
+                </ng-container>
+                <!-- Cliente Column -->
+                <ng-container matColumnDef="Cliente">
+                    <th mat-header-cell *matHeaderCellDef style="display:none;"> Cliente </th>
+                    <td mat-cell *matCellDef="let element" style="display:none;"> {{element.cliente}} </td>
+                </ng-container>                
+                <!-- Folio Column -->
+                <ng-container matColumnDef="Folio">
+                    <th mat-header-cell *matHeaderCellDef style="display:none;"> Folio </th>
+                    <td mat-cell *matCellDef="let element" style="display:none;"> {{element.folio}} </td>
+                  </ng-container>
+                <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr (click)="selecionDato(row)"  mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons ></mat-paginator>
+            </div>   
+    </td>
+</tr>
+
+</table>
+
+
+        

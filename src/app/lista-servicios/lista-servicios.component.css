@@ -1,0 +1,59 @@
+.txtReferencia{
+    text-transform:uppercase;
+}
+ .cabgrid{
+   background-color:  #CDCDCD;
+}
+.buttons{
+  border: 1px solid ;
+  border-color: #029ed9;
+  border-radius: 10px;
+  }
+  .buttons:hover {
+    border: 1px solid ;
+    border-color: CDCDCD;
+    border-radius: 10px;
+    background-color: #029ed9;
+    color: white;
+}
+
+.buttonFile{
+  border: 1px solid ;
+  padding: 10px;
+  font-style: unset;
+  font-weight: 500;
+  border-color: #029ed9;
+  cursor: pointer;
+  border-radius: 10px;
+  }
+
+  .buttonFile:hover {
+    border: 1px solid ;
+    padding: 10px;
+    font-weight: 500;
+    font-weight: bold;
+    border-color: CDCDCD;
+    border-radius: 10px;
+    background-color: #029ed9;
+    color: white;
+}
+
+#GridBusquedaRef {
+  
+  background-color:#F5F5F5;
+  width: 100%;
+}
+#GridBusquedaRef tr:nth-child(even){background-color: #E9E9E9;}
+#GridBusquedaRef tr:hover {background-color:  #CDCDCD;}
+
+#GridBusquedaRef th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;  
+  background-color: #029ed9;
+  color: white;
+}
+.divLoad{
+width: 100px;
+height: 100px;
+}

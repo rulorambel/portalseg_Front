@@ -1,0 +1,43 @@
+export interface Interconeccion
+{
+        CucEmpresarial:string; 
+        Referencia:string;  
+        consultaResultado:string; 
+        Empresa:string;
+        Validacion:string;
+        Mensaje:string;
+        NoNal:string;
+        ClliSist:string;
+        Cvecensal:string;
+        Red:string;
+        Estado:string;
+        Central:string;
+        DirDiv:string;
+        Edificio:string;
+        Host:string;
+        Asl:string;
+        PC:string;
+        TE:string;
+        CL:string;
+        Serie:string;
+        NumIni:string;
+        NumFin:string;
+        TN:string;
+        Id:string;
+        Status:string;
+        Idesp:string;
+        Ts:string;
+        Obser:string;
+        Ido:string;
+        Ida:string;
+        TSer:string;
+        IdDiv:string;
+        IdTNum:string;
+        TClli:string;
+        FolioPlan:string;
+        Compania:string;
+        SiglasPis:string;
+        Dpc:string;
+        Tecnologia:string;
+        IdCia:string;
+}

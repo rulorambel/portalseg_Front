@@ -1,0 +1,184 @@
+<div class="mat-elevation-z8" aling="center">
+    <div  [formGroup]="FormularioAlta"><!--(ngSubmit)="enviarForm()" > --> 
+		<table  style="width: 100%;" >
+		<tr>
+			<td >
+				<div class="divcabecera"><label class="lblcabecera">Datos Interconexión de:  {{ dataInterconeccion["noNal"] }}</label></div> 
+			 </td>
+		</tr>
+
+		   <table  style="width: 100%;" >
+				<tr>
+					<td> <mat-label>Tipo</mat-label></td>
+                          <td>
+							  <mat-form-field style="width: 80%;"> 
+									<mat-select #lselTipo formControlName="Tipo">
+									<mat-option  value="PNT">PNT</mat-option>  
+									<mat-option value="TNT">TNT</mat-option>
+								  </mat-select>
+							  </mat-form-field>
+							</td>
+							<tr>
+                <td>
+                    <mat-label>Origen</mat-label>
+                </td>
+                <td colspan="1">
+                    <mat-form-field class="example-full-width" style="width: 95%;">
+                        <input matInput #txtOrigen  formControlName="Origen" (blur)="buscaOrigen()">             
+                    </mat-form-field>
+                    <div *ngIf="Origen.invalid" class="validadorerror"><span>Origen es <strong>Requerido</strong></span></div>
+				</td>
+				<td>
+					<mat-label>Destino</mat-label>
+				</td>
+				<td colspan="1">
+					<mat-form-field class="example-full-width" style="width: 95%;">
+                <input matInput #txtDestino  formControlName="Destino" (blur)="buscaDestino()">          
+					</mat-form-field>
+				<div *ngIf="Destino.invalid" class="validadorerror"><span>Destino es <strong>Requerido</strong></span></div>
+				</td>
+            </tr>
+				<tr>
+                <td>
+                        <mat-label>IP Origen/OPC</mat-label>
+                </td>
+                <td colspan="1">
+                    <mat-form-field class="example-full-width" style="width: 95%;">
+                        <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()">           
+                    </mat-form-field>
+                    <div *ngIf="IpOrigen.invalid" class="validadorerror"><span>IP Origen/OPC es <strong>Requerido</strong></span></div>
+				</td>
+				<td>
+					<mat-label>IP Destino/OPC</mat-label>
+				</td>
+				<td colspan="1">
+					<mat-form-field class="example-full-width" style="width: 95%;">  
+                        <input matInput #txtIpDestino  formControlName="IpDestino" (blur)="buscaIpDestino()">           
+					</mat-form-field>
+				<div *ngIf="IpDestino.invalid" class="validadorerror"><span>IP Destino/OPC es <strong>Requerido</strong></span></div>
+				</td>
+				</tr>
+				
+				<tr>
+                <td colspan="1">
+                        <mat-label>TDD</mat-label>
+                </td>
+                <td>
+                    <mat-form-field style="width: 80%;">
+                        <mat-label>IDO*</mat-label>
+                        <input matInput #txtIDO  formControlName="IDO"  (blur)="buscaIDO()">          
+                    </mat-form-field>
+                    <div *ngIf="IDO.invalid" class="validadorerror"><span>IDO es <strong>Requerido</strong></span></div>
+				</td>
+				
+				<td>
+					<mat-form-field style="width: 80%;">
+						<mat-label>IDD*</mat-label>
+						<input matInput #txtIDD  formControlName="IDD" (blur)="buscaIDD()">         
+					</mat-form-field>
+					<div *ngIf="IDD.invalid" class="validadorerror"><span>IDD es <strong>Requerido</strong></span></div>
+				</td>
+				
+				<td>
+					<mat-form-field style="width: 80%;">
+						<mat-label>10 Dígitos*</mat-label>
+			            <input matInput #txtDigitos  type="text" size="10"  maxlength="10" formControlName="Digitos" required>   
+					</mat-form-field>
+					<div *ngIf="Digitos.invalid" class="validadorerror"><span>Digitos es <strong>Requerido</strong></span></div>
+				</td>
+				</tr>
+
+                <td>
+                     <mat-label>Port ID</mat-label>
+                </td>
+					<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 150%;">
+							<input matInput #txtPortID  type="text" formControlName="PortID" required>          
+						</mat-form-field>
+						<div *ngIf="PortID.invalid" class="validadorerror"><span>Port ID es <strong>Requerido</strong></span></div>
+				</td>
+				
+				<tr>
+                <td>
+                    <mat-label>Operador Origen (IDO)</mat-label>
+                </td>
+				
+                <td colspan="1">
+                    <mat-form-field class="example-full-width" style="width: 95%;">
+                        <input matInput #OperadorOrigen readonly formControlName="OperadorOrigen">   
+                    </mat-form-field>
+				</td>
+				
+				<td>
+					<mat-label>Operador Destino (IDD)</mat-label>
+				</td>
+				<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 95%;">
+							<input matInput #OperadorDestino readonly formControlName="OperadorDestino">        
+						</mat-form-field>
+				</td>
+				
+				<tr>
+				<td>
+						<mat-label>Ciudad Origen (NIR)</mat-label>
+				</td>
+				<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 95%;">
+							<input matInput #CiudadOrigen readonly formControlName="CiudadOrigen">      
+				</mat-form-field>
+				</td>
+				
+				<td>
+						<mat-label>Ciudad Destino (NIR)</mat-label>
+				</td>
+				
+				<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 95%;">
+        					<input matInput #CiudadDestino readonly formControlName="CiudadDestino">        
+						</mat-form-field>
+				</td>
+
+				<tr>
+				<td>
+						<mat-label>Central Origen (OPC/IP)</mat-label>
+				</td>
+				
+				<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 95%;"> 
+							<input matInput #CentralOrigen readonly formControlName="CentralOrigen">      
+						</mat-form-field>
+				</td>
+					
+				<td>
+						<mat-label>Central Destino (DPC/IP)</mat-label>
+				</td>
+							
+				<td colspan="1">
+						<mat-form-field class="example-full-width" style="width: 95%;">
+							<input matInput #CentralDestino readonly formControlName="CentralDestino">          
+						</mat-form-field>
+				</td>
+
+				<tr>
+				<td>
+						<mat-label>CIC</mat-label>
+				</td>
+					<td colspan="3">
+						<mat-form-field class="example-full-width" style="width: 95%;">
+							<input matInput #txtCIC  formControlName="CIC">       
+						</mat-form-field>
+					</td>
+				
+                    <tr>
+                        <td colspan="2" align="Center">
+                            <button mat-raised-button class="buttons" (click)="enviaAlta()" >Agregar</button>
+                        </td>
+                        <td colspan="2"  align="Center">
+                            <button mat-raised-button class="buttons" (click)="cerrarDialog()" >Cancelar</button>
+                        </td>
+                    </tr>
+				</table>  
+			</table>  
+        
+    </div> <!--Aqui es el fin del fomulario-->
+</div>

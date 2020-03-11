@@ -1,0 +1,34 @@
+<div class="marco"  >
+    <mat-accordion > 
+    <mat-expansion-panel  [expanded]=true (opened)="setStep(0)" >
+       <mat-expansion-panel-header class="headpnl"  [collapsedHeight]="'30px'" [expandedHeight]="'30px'" >
+          <mat-panel-title>Lista Servicios </mat-panel-title>
+     </mat-expansion-panel-header> 
+     <div style="width: 98% align=center" >
+         <app-lista-servicios (cambiaAlta)="cambiarAAlta($event)" (limpiaHijos)="limpiarComponentes($event)" (cambiaConsulta) ="cambiarAConsulta($event)" ></app-lista-servicios>
+       </div>
+    </mat-expansion-panel>
+ 
+ <!--        panel Alta deL Incidente                  -->
+ 
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)"  >
+     <mat-expansion-panel-header class="headpnl" [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+       <mat-panel-title>Alta Incidente</mat-panel-title>
+     </mat-expansion-panel-header >
+      <app-alta-queja [style.visibility]="esvisibleAlta ? 'visible' : 'collapse'"></app-alta-queja>
+      <app-alta-queja-cmp (siceg11Ev)="siceg11Event($event)" [style.visibility]="esvisibleAltaCMP ? 'visible' : 'collapse'"></app-alta-queja-cmp>
+      <app-alta-queja-inx [style.visibility]="esvisibleAltaInx ? 'visible' : 'collapse'"></app-alta-queja-inx>
+    </mat-expansion-panel>
+ 
+ 
+  <!--        panel Alta del Incidente                  -->
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" >
+    <mat-expansion-panel-header class="headpnl" [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+      <mat-panel-title>Servicios Reportados</mat-panel-title>
+    </mat-expansion-panel-header>
+   <app-consulta-queja></app-consulta-queja>
+  </mat-expansion-panel>  
+</mat-accordion >
+ </div>
+ 
+ 

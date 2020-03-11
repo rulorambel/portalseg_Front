@@ -1,0 +1,107 @@
+<table style="width: 100%;" >
+<tr>
+    <td style="width: 20%">
+        <label class="lblcabecera">Seleccionar Empresa</label>
+       <div class="divLista">
+          <mat-action-list  role="list" *ngFor= "let emp of variables.getEmpresasSelecionadas()"> 
+               <button mat-list-item (click)="buscaContactos(emp.CUC,emp.RazonSocial)" class="buttonslist" >{{emp.RazonSocial}} </button>
+          </mat-action-list>
+        </div>
+    </td>
+    <td >
+ 
+  <div [formGroup]="FormularioContacto">
+        <table style="width: 100%;">
+            <tr>
+               <td colspan="6">
+               <p>  {{lblEmpresa}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width" class="input">
+                     <input matInput placeholder="Contacto"  style="text-transform:uppercase;" #txtContSitContacto formControlName="ContSitContacto" required >
+                    </mat-form-field>
+                    <div *ngIf="Obligatorio">
+                    <div *ngIf="ContSitContacto.invalid" class="validadorerror"><span>Contacto es <strong>Requerido (Nombre Completo)</strong></span></div>
+                </div>
+                    <td>
+                    <mat-form-field class="example-full-width"  class="input">
+                      <input matInput placeholder="Teléfono" #txtContSitTelefono type="text" size="10"  maxlength="10" (keyup)="filtraTelefono($event)"  formControlName="ContSitTelefono"  required>
+                    </mat-form-field>
+                    <div *ngIf="Obligatorio">
+                    <div *ngIf="ContSitTelefono.invalid" class="validadorerror"><span>Teléfono es <strong>Requerido (10 Dígitos)</strong></span></div>
+                </div>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width"  class="input">
+                      <input  matInput placeholder="Correo" #txtContSitCorreo formControlName="ContSitCorreo" name= "txtContSitCorreo" required>
+                    </mat-form-field>
+                    <div *ngIf="Obligatorio">
+                    <div *ngIf="ContSitCorreo.invalid" class="validadorerror"><span>Correo es <strong>Requerido (Formato Válido)</strong></span></div>
+                </div>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width"  class="input">
+                      <input matInput placeholder="Celular" #txtContSitCelular  type="text" size="10"  maxlength="10" (keyup)="filtraCel($event)"  formControlName="ContSitCelular" name ="txtContSitCelular" required>
+                    </mat-form-field>
+                    <div *ngIf="Obligatorio">
+                    <div *ngIf="ContSitCelular.invalid" class="validadorerror"><span>Celular es <strong>Requerido (10 Dígitos)</strong></span></div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--<button mat-raised-button class="buttons" > Busca </button>-->
+                    <button mat-raised-button class="buttons" (click)="modificaContacto(txtContSitContacto.value,txtContSitTelefono.value,txtContSitCorreo.value,txtContSitCelular.value)" [disabled]="disbtnMod" > Modifica </button>
+                    <button mat-raised-button class="buttons"  (click)="creaContacto(txtContSitContacto.value,txtContSitTelefono.value,txtContSitCorreo.value,txtContSitCelular.value)" [disabled]="disbtnCrea"  > Crea </button>
+                 </td>
+                 <td colspan="5">
+                    <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Filtro para Contactos" (keyup)="filtraContactos($event.target.value)"  formControlName="ContSitFiltro">
+                           
+                    </mat-form-field>
+                </td>
+            <tr>
+                <td colspan="6" align="center">
+                  <div class="divcabecera"> <label class="lblcabecera">Lista de Contactos en Sitios</label></div> 
+                  <div class="divLoad"  *ngIf="visibleLoad"> <img [src]="'assets/img/load.gif'" class="divLoad" ></div>   
+                  <div  class="mat-elevation-z8" >
+                        <table id="GridContactos" mat-table [dataSource]="dataSource" style="width: 100%;" *ngIf="!visibleLoad" >
+                            <!-- Nombre Column -->
+                            <ng-container matColumnDef="Nombre">
+                              <th mat-header-cell *matHeaderCellDef> Contacto en Sitio </th>
+                              <td mat-cell *matCellDef="let element"> {{element.contacto}} </td>
+                            </ng-container>
+                            <!-- Telefono Column -->
+                            <ng-container matColumnDef="Telefono">
+                                <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+                                <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                            </ng-container>
+                             <!-- Correo Column -->
+                             <ng-container matColumnDef="Correo">
+                                    <th mat-header-cell *matHeaderCellDef>Correo</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                </ng-container>
+                            <!-- Celular Column -->
+                            <ng-container matColumnDef="Celular">
+                                <th mat-header-cell *matHeaderCellDef >Celular</th>
+                                <td mat-cell *matCellDef="let element" > {{element.celular}} </td>
+                            </ng-container>
+                           
+                            <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr (click)="muestraContacto(row)"  mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons ></mat-paginator>
+             </div>   
+
+                </td>
+            </tr>
+          
+        </table>
+  </div>
+  
+    </td>
+</tr>
+
+</table>

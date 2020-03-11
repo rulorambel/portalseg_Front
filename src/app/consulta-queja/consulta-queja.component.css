@@ -1,0 +1,32 @@
+.buttons{
+  border: 1px solid ;
+  border-color: #029ed9;
+  border-radius: 10px;
+  }
+  .buttons:hover {
+    border: 1px solid ;
+    border-color: CDCDCD;
+    border-radius: 10px;
+    background-color: #029ed9;
+    color: white;
+}
+
+#GridBusquedaQueja {
+  
+  background-color:#F5F5F5;
+  width: 100%;
+}
+#GridBusquedaQueja tr:nth-child(even){background-color: #E9E9E9;}
+#GridBusquedaQueja tr:hover {background-color:  #CDCDCD;}
+
+#GridBusquedaQueja th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;  
+  background-color: #029ed9;
+  color: white;
+}
+.divLoad{
+  width: 100px;
+  height: 100px;
+  }
