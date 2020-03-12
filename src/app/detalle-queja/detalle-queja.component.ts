@@ -123,22 +123,22 @@ public actualizarQueja()
  
     this.servhttp.consultaQueja(parametros)
      .subscribe(data=>{
-                  if(data[0]["mensaje"]=="Correcto" )
+                  if(data["codigo"]=="0" )
                   {
                     console.log (data);
                    // this.variables.getQuejaSeleccionada();
                     this.variables.setQuejaSeleccionada( data[0]);                   
-                    this.lblQueja = data[0]["IDqueja"];
-                    this.problema = data[0]["problemaReportado"];
-                    this.FolioConsecionario= data[0]["folioConcesionario"];
-                    this.NIS = data[0]["referencia"];
-                    this.FechaReparacion = data[0]["fechaHorareparacion"];
-                    this.HorarioAcceso = data[0]["horarioAcceso"];
-                    this.Prioridad  = data[0]["prioridad"] ;
-                    this.Estado  = data[0]["estadoGlobal"] ;
+                    this.lblQueja = data['data'][0]["IDqueja"];
+                    this.problema = data['data'][0]["problemaReportado"];
+                    this.FolioConsecionario= data['data'][0]["folioConcesionario"];
+                    this.NIS = data['data'][0]["referencia"];
+                    this.FechaReparacion = data['data'][0]["fechaHorareparacion"];
+                    this.HorarioAcceso = data['data'][0]["horarioAcceso"];
+                    this.Prioridad  = data['data'][0]["prioridad"] ;
+                    this.Estado  = data['data'][0]["estadoGlobal"] ;
                     this.actualizaQuejaSeleccion.emit();
                    
-                    if ( data[0]["validacionCliente"] == "true")
+                    if ( data['data'][0]["validacionCliente"] == "true")
                         this.validacionCliente  = true; 
                         else 
                         this.validacionCliente  = false; 
@@ -257,13 +257,13 @@ public consultaBitacora()
       this.servhttp.consultaBitacora(parametros)
        .subscribe(data=>{
            this.visibleLoad=false;
-          if(data[0]["mensaje"]=="Correcto" )
+          if(data["codigo"]=="0" )
           {          
-            this.Bitacora =  data;          
+            this.Bitacora =  data['data'];          
             this.enviaAcuseRecibo();          
           }
           else 
-          this.variables.muestraBarra(data[0]["mensaje"], "MSG");        
+          this.variables.muestraBarra(data["mensaje"], "MSG");        
                   }
           );
   }

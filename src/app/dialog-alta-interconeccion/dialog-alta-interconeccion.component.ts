@@ -148,7 +148,8 @@ else
 { 
   console.log ("Regresando de la consulta ciudad");
   console.log (dat);
-  this.CiudadOrigen.setValue(dat[0].ciudad);
+  if (dat['codigo']=="0")
+  this.CiudadOrigen.setValue(dat['data'][0].ciudad);
 }
         );  
 }
@@ -179,7 +180,8 @@ buscaIpOrigen()
     {
       console.log ("Regresando de la consulta central");
       console.log (dat);
-      this.CentralOrigen.setValue(dat[0].centralEqp);
+      if (dat['codigo']=="0")
+      this.CentralOrigen.setValue(dat['data'][0].centralEqp);
     }
               );	
 }
@@ -222,7 +224,8 @@ if (intLada == 55 || intLada == 33 || intLada == 56 ||intLada == 81)
   {
     console.log ("Regresando de la Consulta Ciudad");
     console.log (dat);
-    this.CiudadDestino.setValue(dat[0].ciudad);
+    if (dat['codigo']=="0")
+    this.CiudadDestino.setValue(dat['data'][0].ciudad);
   }
       );
 }
@@ -258,7 +261,8 @@ buscaIpDestino()
   {
     console.log ("Regresando de la consulta central");
     console.log (dat);
-    this.CentralDestino.setValue(dat[0].centralEqp);
+    if (dat['codigo']=="0")
+    this.CentralDestino.setValue(dat['data'][0].centralEqp);
   }
                 );
 
@@ -294,7 +298,8 @@ this.servhttp.consultaOperador(parametros)
 {
   console.log ("Regresando de la Consulta IDO");
   console.log (dat);
-  this.OperadorOrigen.setValue(dat[0].central);
+  if (dat['codigo']=="0")
+  this.OperadorOrigen.setValue(dat['data'][0].central);
 }
 
       );
@@ -332,7 +337,8 @@ this.servhttp.consultaOperador(parametros)
 {
   console.log ("Regresando de la consulta IDD");
   console.log (dat);
-  this.OperadorDestino.setValue(dat[0].central);
+  if (dat['codigo']=="0")
+  this.OperadorDestino.setValue(dat['data'][0].central);
 }
              );
 
