@@ -634,7 +634,8 @@ buscaIpOrigen()
     {
       console.log ("Regresando de la consulta central");
       console.log (dat);
-      this.CentralOrigen.setValue(dat[0].centralEqp);
+  if (dat['codigo']=="0")
+  this.CentralOrigen.setValue(dat['data'][0].centralEqp);
     }
               );	
 }
@@ -666,7 +667,8 @@ buscaIpDestino()
   {
     console.log ("Regresando de la consulta central");
     console.log (dat);
-    this.CentralDestino.setValue(dat[0].centralEqp);
+    if (dat['codigo']=="0")
+  this.CentralDestino.setValue(dat['data'][0].centralEqp);
   }
                 );
 
