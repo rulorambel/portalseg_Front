@@ -199,54 +199,70 @@ private enviaQueja()
 *
 **************************************************************************************/
 
-  private formaXML()
-  {
-  console.log (this.generarCadenaFallas());
-    let fechaActual= this.formatoFecha(new Date());
-    return  "<AseguramientoQuejas>"
-                +"<SolicitudAseguramiento>"
-                        +"<FechaDeCita>"+fechaActual +"</FechaDeCita>"
-                        +"<CUCEmpresarial>"+ this.variables.getCUC()+"</CUCEmpresarial>"
-                        +"<IdentificadorDeEmpresa>IdentificadorDeEmpresa</IdentificadorDeEmpresa>"
-                        +"<NombreDeUsuarioDeEmpresa>"+this.variables.getUsuario()+"</NombreDeUsuarioDeEmpresa>"
-                        +"<DireccionDeEmpresa>Direccion de la empresa</DireccionDeEmpresa>"
-                        +"<NombreDeEmpresa>"+this.variables.getEmpresasSelecionadas()[0].RazonSocial+"</NombreDeEmpresa>"   
-                        +"<HorarioDeAccesoASitioDiaInicio>"+ this.DiaAccesoIni.value["name"]  +"</HorarioDeAccesoASitioDiaInicio>"
-                        +"<HorarioDeAccesoASitioHoraInicio>"+this.HrAccesoIni.value["name"]+"</HorarioDeAccesoASitioHoraInicio>"
-                        +"<HorarioDeAccesoASitioDiaFin>"+ this.DiaAccesoFin.value["name"]+"</HorarioDeAccesoASitioDiaFin>"
-                        +"<HorarioDeAccesoASitioHoraFin>"+this.HrAccesoFin.value["name"] +"</HorarioDeAccesoASitioHoraFin>"
-                        +"<TelefonoCentroDeAtencion/>"
-                        +"<FechaDeDeteccionDeFalla>"+fechaActual+"</FechaDeDeteccionDeFalla>"
-                        +"<NombreDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"Nombre")+"</NombreDeContactoEnSitio>"
-                        +"<ApellidoPaternoDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"apellidoPaterno")+"</ApellidoPaternoDeContactoEnSitio>"
-                        +"<ApellidoMaternoDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"apellidoMaterno")+"</ApellidoMaternoDeContactoEnSitio>"
-                        +"<TelefonoDeContactoEnSitio>"+ this.interlocutores.FormularioContacto.value["ContSitTelefono"]+"</TelefonoDeContactoEnSitio>"
-                        +"<MovilDeContactoEnSitio>"+this.interlocutores.FormularioContacto.value["ContSitCelular"]+"</MovilDeContactoEnSitio>"
-                        +"<NombreDeContactoParaSeguimiento>"+ this.variables.getNombre()+"</NombreDeContactoParaSeguimiento>"
-                        +"<ApellidoPaternoDeContactoParaSeguimiento>"+ this.variables.getApep()+"</ApellidoPaternoDeContactoParaSeguimiento>"
-                        +"<ApellidoMaternoDeContactoParaSeguimiento>"+ this.variables.getApem()+"</ApellidoMaternoDeContactoParaSeguimiento>"
-                        +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
-                        +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
-                        +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
-                        +"<DescripcionDetalladaDeFalla>"+ this.DescripFalla.value +"</DescripcionDetalladaDeFalla>"
-                        +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
-                        +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
-                        +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
-                        +"<DatosServicioDeComparticion>"
-                        +"<IdentificadorNISDeServicio>"+this.variables.getIdNis()+"</IdentificadorNISDeServicio>"
-                            +"<GeolocalizacionLongitud>"+this.variables.getGeoLatitud()+"</GeolocalizacionLongitud>"
-                            +"<GeolocalizacionLatitud>"+this.variables.getGeoLongitud()+"</GeolocalizacionLatitud>"
-                            +"<TipoDeElemento>"+this.variables.getTipoElemento()+"</TipoDeElemento>"
-                            +"<IdentificadorElemento>"+this.variables.getIdElemento()+"</IdentificadorElemento>"
-                        +"</DatosServicioDeComparticion>"
-                        +"<FallaMasiva></FallaMasiva>"
-                        +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
-            +"</SolicitudAseguramiento>"
-            +"<DatosControl>"
-                +"<IdCorrelacion>" + this.getIDCorre ()+"</IdCorrelacion>"
-            +"</DatosControl>" 
-            +"</AseguramientoQuejas>";
-    }
+private formaXML()
+{
+console.log (this.generarCadenaFallas());
+  let fechaActual= this.formatoFecha(new Date());
+  return  "<AseguramientoQuejas>"
+              +"<SolicitudAseguramiento>"
+                      +"<FechaDeCita>"+fechaActual +"</FechaDeCita>"
+                      +"<CUCEmpresarial>"+ this.variables.getCUC()+"</CUCEmpresarial>"
+                      +"<IdentificadorDeEmpresa>IdentificadorDeEmpresa</IdentificadorDeEmpresa>"
+                      +"<NombreDeUsuarioDeEmpresa>"+this.variables.getUsuario()+"</NombreDeUsuarioDeEmpresa>"
+                      +"<DireccionDeEmpresa>Direccion de la empresa</DireccionDeEmpresa>"
+                      +"<NombreDeEmpresa>"+this.variables.getEmpresasSelecionadas()[0].RazonSocial+"</NombreDeEmpresa>"   
+                      +"<HorarioDeAccesoASitioDiaInicio>"+ this.DiaAccesoIni.value["name"]  +"</HorarioDeAccesoASitioDiaInicio>"
+                      +"<HorarioDeAccesoASitioHoraInicio>"+this.HrAccesoIni.value["name"]+"</HorarioDeAccesoASitioHoraInicio>"
+                      +"<HorarioDeAccesoASitioDiaFin>"+ this.DiaAccesoFin.value["name"]+"</HorarioDeAccesoASitioDiaFin>"
+                      +"<HorarioDeAccesoASitioHoraFin>"+this.HrAccesoFin.value["name"] +"</HorarioDeAccesoASitioHoraFin>"
+                      +"<TelefonoCentroDeAtencion/>"
+                      +"<FechaDeDeteccionDeFalla>"+fechaActual+"</FechaDeDeteccionDeFalla>"
+                      +"<NombreDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"Nombre")+"</NombreDeContactoEnSitio>"
+                      +"<ApellidoPaternoDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"apellidoPaterno")+"</ApellidoPaternoDeContactoEnSitio>"
+                      +"<ApellidoMaternoDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"apellidoMaterno")+"</ApellidoMaternoDeContactoEnSitio>"
+                      +"<TelefonoDeContactoEnSitio>"+ this.interlocutores.FormularioContacto.value["ContSitTelefono"]+"</TelefonoDeContactoEnSitio>"
+                      +"<MovilDeContactoEnSitio>"+this.interlocutores.FormularioContacto.value["ContSitCelular"]+"</MovilDeContactoEnSitio>"
+                      +"<NombreDeContactoParaSeguimiento>"+ this.variables.getNombre()+"</NombreDeContactoParaSeguimiento>"
+                      +"<ApellidoPaternoDeContactoParaSeguimiento>"+ this.variables.getApep()+"</ApellidoPaternoDeContactoParaSeguimiento>"
+                      +"<ApellidoMaternoDeContactoParaSeguimiento>"+ this.variables.getApem()+"</ApellidoMaternoDeContactoParaSeguimiento>"
+                      +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
+                      +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
+                      +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
+                      +"<DescripcionDetalladaDeFalla>"+ this.DescripFalla.value +"</DescripcionDetalladaDeFalla>"
+                      +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
+                      +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
+                      +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
+                      +"<DatosServicioDeComparticion>"
+                      +"<IdentificadorNISDeServicio>"+this.variables.getIdNis()+"</IdentificadorNISDeServicio>"
+                          +"<GeolocalizacionLongitud>"+this.variables.getGeoLatitud()+"</GeolocalizacionLongitud>"
+                          +"<GeolocalizacionLatitud>"+this.variables.getGeoLongitud()+"</GeolocalizacionLatitud>"
+                          +"<TipoDeElemento>"+this.variables.getTipoElemento()+"</TipoDeElemento>"
+                          +"<IdentificadorElemento>"+this.variables.getIdElemento()+"</IdentificadorElemento>"
+                      +"</DatosServicioDeComparticion>"
+                      +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
+                      +"<Origen1></Origen1>"
+                      +"<Destino1></Destino1>"
+                      +"<Origen2></Origen2>"
+                      +"<Destino2></Destino2>"
+                      +"<IPOrigen></IPOrigen>"
+                      +"<IPDestino></IPDestino>"
+                      +"<TDD-IDO></TDD-IDO>"
+                      +"<TDD-IDD></TDD-IDD>"
+                      +"<TDD-10D></TDD-10D>"
+                      +"<PortID></PortID>"
+                      +"<CIC></CIC>"
+                  +"</DatosServicioDeInterconexion-Trafico-Portabilidad>"
+                      +"<FallaMasiva></FallaMasiva>"
+                      +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
+                      +"<Comentarios>"+this.DescripFalla.value+"</Comentarios>"
+                      +"<FolioDelCliente>"+this.FolioCliente.value+"</FolioDelCliente>"
+
+          +"</SolicitudAseguramiento>"
+          +"<DatosControl>"
+              +"<IdCorrelacion>" + this.getIDCorre ()+"</IdCorrelacion>"
+          +"</DatosControl>" 
+          +"</AseguramientoQuejas>";
+  }
   
 
   get NIS () {return this.FormularioAlta.get('NIS');}
@@ -259,12 +275,16 @@ private enviaQueja()
   get HrAccesoFin  (){return this.FormularioAlta.get('HrAccesoFin');}
   get FolioCliente (){return this.FormularioAlta.get('FolioCliente');}
   get Caracteristica (){return this.FormularioAlta.get('Caracteristica');}
+  get IpOrigen  (){return this.FormularioAlta.get('IpOrigen');}
+  get IpDestino (){return this.FormularioAlta.get('IpDestino');}
+  get CentralOrigen (){return this.FormularioAlta.get('CentralOrigen');}
+  get CentralDestino (){return this.FormularioAlta.get('CentralDestino');}
+  get CIC (){return this.FormularioAlta.get('CIC');}
   get IdNis  (){return this.FormularioAlta.get('IdNis');}
   get GeoLatitud (){return this.FormularioAlta.get('GeoLatitud');}
   get TipoElemento (){return this.FormularioAlta.get('TipoElemento');}
   get GeoLongitud (){return this.FormularioAlta.get('GeoLongitud');}
   get IdElemento (){return this.FormularioAlta.get('IdElemento');}
-
 
   private getIDCorre()
   {

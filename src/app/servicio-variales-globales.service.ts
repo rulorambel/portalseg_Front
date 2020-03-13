@@ -321,6 +321,7 @@ public setIdNis(pIdNis:string)
 }
 public getIdNis()
 {
+ 
   return typeof this.IdNis == 'undefined' ? '' : this.IdNis;
 }
 

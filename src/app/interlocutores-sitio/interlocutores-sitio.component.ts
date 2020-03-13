@@ -119,7 +119,7 @@ constructor(  public servhttp : ServicioHttpService ,
         {
           this.variables.muestraBarra("Ocurrio un error interno, por favor intentalo más tarde", "ERROR");
         }else{
-           this.variables.muestraBarra(data[0].mensaje, "Msg");
+           this.variables.muestraBarra(data.mensaje, "Msg");
         }
 
       });

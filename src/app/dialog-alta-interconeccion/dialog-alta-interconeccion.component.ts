@@ -39,7 +39,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
   {
     
     return new FormGroup({
-        //NIS             : new FormControl({value: this.variables.getReferenciaSelecionada(), disabled: true}),
+     
         Origen          : new FormControl('', [Validators.required]),
         Destino         : new FormControl('', [Validators.required]),
         IpOrigen        : new FormControl('', [Validators.required]),
