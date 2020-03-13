@@ -263,7 +263,7 @@ public consultaBitacora()
             this.enviaAcuseRecibo();          
           }
           else 
-          this.variables.muestraBarra(data["mensaje"], "MSG");        
+          this.variables.muestraBarra(data['mensaje'], "MSG");        
                   }
           );
   }
