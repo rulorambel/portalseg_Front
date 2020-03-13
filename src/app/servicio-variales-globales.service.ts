@@ -25,7 +25,9 @@ export class ServicioVarialesGlobalesService {
   private Apem  :string;
   private Celular  :string;
   private Origen  :string;
-  private Destino  :string
+  private Destino  :string;
+  private Origen2  :string;
+  private Destino2  :string;
   private ipOrigen :string;
   private ipDestino :string;
   private IDO :string;
@@ -38,6 +40,7 @@ export class ServicioVarialesGlobalesService {
   private GeoLongitud  :string  
   private IdElemento :string
   private TipoElemento :string
+  private BndAlta: boolean;
 
 
   constructor( private snack : MatSnackBar ) { }
@@ -64,7 +67,7 @@ export class ServicioVarialesGlobalesService {
 
   public getReferenciaSelecionada ()
   {
-      return this.ReferenciaSelecionada;
+    return typeof this.ReferenciaSelecionada == 'undefined' ? '' : this.ReferenciaSelecionada;
   }
 
   public getQuejaSeleccionada ()
@@ -191,7 +194,7 @@ public getCUC()
 *
 *   @Author:		Anahi Flores
 *   @Date:		  17/01/2020
-*   @update:    17/01/2020
+*   @update:    13/03/2020
 *   @Version:   1.0
 * 
 *-------------------------------------------------------------------------------------
@@ -205,7 +208,7 @@ public setOrigen(pOrigen:string)
 }
 public getOrigen()
 {
-  return this.Origen;
+  return typeof this.Origen == 'undefined' ? '' : this.Origen;
 }
 
 public setDestino(pDestino:string)
@@ -214,7 +217,25 @@ public setDestino(pDestino:string)
 }
 public getDestino()
 {
-  return this.Destino ;
+  return typeof this.Destino == 'undefined' ? '' : this.Destino;
+}
+
+public setOrigen2(pOrigen:string)
+{
+  this.Origen2 = pOrigen;
+}
+public getOrigen2()
+{
+  return typeof this.Origen2 == 'undefined' ? '' : this.Origen2;
+}
+
+public setDestino2(pDestino:string)
+{
+  this.Destino2 = pDestino;
+}
+public getDestino2()
+{
+  return typeof this.Destino2 == 'undefined' ? '' : this.Destino2;
 }
 
 public setipOrigen(pipOrigen:string)
@@ -223,7 +244,7 @@ public setipOrigen(pipOrigen:string)
 }
 public getipOrigen()
 {
-  return this.ipOrigen ;
+  return typeof this.ipOrigen == 'undefined' ? '' : this.ipOrigen;
 }
 
 public setipDestino(pipDestino:string)
@@ -232,7 +253,7 @@ public setipDestino(pipDestino:string)
 }
 public getipDestino()
 {
-  return this.ipDestino ;
+  return typeof this.ipDestino == 'undefined' ? '' : this.ipDestino;
 }
 
 public setIDO(pIDO:string)
@@ -241,7 +262,7 @@ public setIDO(pIDO:string)
 }
 public getIDO()
 {
-  return this.IDO;
+  return typeof this.IDO == 'undefined' ? '' : this.IDO;
 }
 
 public setIDD(pIDD:string)
@@ -250,7 +271,7 @@ public setIDD(pIDD:string)
 }
 public getIDD()
 {
-  return this.IDD;
+  return typeof this.IDD == 'undefined' ? '' : this.IDD;
 }
 
 public setDigitos(pDigitos:string)
@@ -259,7 +280,7 @@ public setDigitos(pDigitos:string)
 }
 public getDigitos()
 {
-  return this.Digitos;
+  return typeof this.Digitos == 'undefined' ? '' : this.Digitos;
 }
 
 
@@ -269,7 +290,7 @@ public setPortID(pPortID:string)
 }
 public getPortID()
 {
-  return this.PortID;
+  return typeof this.PortID == 'undefined' ? '' : this.PortID;
 }
 
 
@@ -279,14 +300,14 @@ public setCIC(pCIC:string)
 }
 public getCIC()
 {
-  return this.CIC;
+  return typeof this.CIC == 'undefined' ? '' : this.CIC;
 }
 /**************************************************************************************  
 *   Variables para Tipo de Servicio Compartición
 *
 *   @Author:		Anahi Flores
 *   @Date:		  17/02/2020
-*   @update:    17/02/2020
+*   @update:    13/03/2020
 *   @Version:   1.0
 * 
 *-------------------------------------------------------------------------------------
@@ -300,7 +321,7 @@ public setIdNis(pIdNis:string)
 }
 public getIdNis()
 {
-  return this.IdNis;
+  return typeof this.IdNis == 'undefined' ? '' : this.IdNis;
 }
 
 public setGeoLatitud(pGeoLatitud:string)
@@ -309,7 +330,7 @@ public setGeoLatitud(pGeoLatitud:string)
 }
 public getGeoLatitud()
 {
-  return this.GeoLatitud;
+  return typeof this.GeoLatitud == 'undefined' ? '' : this.GeoLatitud;
 }
 
 public setTipoElemento(pTipoElemento:string)
@@ -318,7 +339,7 @@ public setTipoElemento(pTipoElemento:string)
 }
 public getTipoElemento()
 {
-  return this.TipoElemento;
+  return typeof this.TipoElemento == 'undefined' ? '' : this.TipoElemento;
 }
 
 public setGeoLongitud(pGeoLongitud:string)
@@ -327,7 +348,7 @@ public setGeoLongitud(pGeoLongitud:string)
 }
 public getGeoLongitud()
 {
-  return this.GeoLongitud;
+  return typeof this.GeoLatitud == 'undefined' ? '' : this.GeoLatitud;
 }
 
 public setIdElemento(pIdElemento:string)
@@ -336,6 +357,15 @@ public setIdElemento(pIdElemento:string)
 }
 public getIdElemento ()
 {
-  return this.IdElemento;
+  return typeof this.IdElemento == 'undefined' ? '' : this.IdElemento;
 }
+
+  public setBndAlta(pAlta:boolean) {
+    this.BndAlta = pAlta;
+  }
+
+  public getBndAlta(){
+    return this.BndAlta;
+  }
 }
+

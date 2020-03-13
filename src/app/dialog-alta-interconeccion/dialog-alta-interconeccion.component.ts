@@ -83,7 +83,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
       this.variables.setDigitos (this.Digitos.value);
       this.variables.setPortID (this.PortID.value);
       this.variables.setCIC (this.CIC.value);
-
+      this.variables.setBndAlta(true);
 
       this.dialogLoad.close(this.FormularioAlta);
    

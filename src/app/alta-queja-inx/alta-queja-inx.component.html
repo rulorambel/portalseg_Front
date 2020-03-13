@@ -23,16 +23,18 @@
             </tr>
             <table  style="width: 100%;" >
             <tr>
-                <td> <mat-label>IP Origen/OPC</mat-label></td>
+                <td> <mat-label>IP Origen/OPC {{ variables.getBndAlta() }}</mat-label></td>
                 <td>
                     <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()">           
+                        <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()" [required]="!variables.getBndAlta()">           
                     </mat-form-field>
+                    <div *ngIf="IpOrigen.invalid && !variables.getBndAlta() "  class="validadorerror"><span>IP Origen/OPC es <strong>Requerido</strong></span></div> 
                  <td> <mat-label>IP Destino/OPC</mat-label></td>
                  <td>
                         <mat-form-field class="example-full-width" style="width: 95%;">  
-                            <input matInput #txtIpDestino  formControlName="IpDestino" (blur)="buscaIpDestino()">           
+                            <input matInput #txtIpDestino  formControlName="IpDestino" (blur)="buscaIpDestino()" [required]="!variables.getBndAlta()">           
                         </mat-form-field>
+                        <div *ngIf="IpDestino.invalid && !variables.getBndAlta() "  class="validadorerror"><span>IP Destino/OPC es <strong>Requerido</strong></span></div>   
                  </td>
             </tr>
             <tr>

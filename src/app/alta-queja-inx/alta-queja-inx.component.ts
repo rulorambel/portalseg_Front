@@ -56,6 +56,7 @@ CaracteristicaDet:any;
     this.FormularioAlta= this.createFormGroup();
     this.filtraFallas();
     this.generarCadenaFallas();
+    this.variables.setBndAlta(false);
    }
 
    ngOnInit() {
@@ -66,7 +67,7 @@ CaracteristicaDet:any;
 *
 *   @Author:		RuloRamBel
 *   @Date:		  11/11/2019
-*   @update:    11/11/2019  
+*   @update:    13/03/2020  
 *   @Version:   1.0
 *   @Funcion    crearQueja
 *  	@param:		  
@@ -78,19 +79,25 @@ CaracteristicaDet:any;
   {
    this.disabled_btnCreaQueja="true";
 
-   /*if (this.interlocutores.FormularioContacto.status =="INVALID")
+      if (this.interlocutores.FormularioContacto.status =="INVALID")
       {
         this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
         this.disabled_btnCreaQueja="false";
         return;
-       }*/
-       if (this.FormularioAlta.status =="INVALID")
-       {
+      }
+      if (this.FormularioAlta.status =="INVALID")
+      {
          this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
          this.disabled_btnCreaQueja="false";
          return;
-        }
-        this.enviaQueja();
+      }
+      if(!this.variables.getBndAlta()) {
+        this.variables.setOrigen2(this.CentralOrigen.value);
+        this.variables.setDestino2(this.CentralDestino.value);
+        this.variables.setipOrigen(this.IpOrigen.value);
+        this.variables.setipDestino(this.IpDestino.value);
+      }
+      this.enviaQueja();
   }
 
  /**************************************************************************************  
@@ -241,10 +248,10 @@ console.log (this.generarCadenaFallas());
                       +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<Origen1>"+this.variables.getOrigen()+"</Origen1>"
                       +"<Destino1>"+this.variables.getDestino()+"</Destino1>"
-                      +"<Origen2>"+this.CentralOrigen.value+"</Origen2>"
-                      +"<Destino2>"+this.CentralDestino.value+"</Destino2>"
-                      +"<IPOrigen>"+this.IpOrigen.value+"</IPOrigen>"
-                      +"<IPDestino>"+this.IpDestino.value+"</IPDestino>"
+                      +"<Origen2>"+this.variables.getOrigen2()+"</Origen2>"
+                      +"<Destino2>"+this.variables.getDestino2()+"</Destino2>"
+                      +"<IPOrigen>"+this.variables.getipOrigen()+"</IPOrigen>"
+                      +"<IPDestino>"+this.variables.getipDestino()+"</IPDestino>"
                       +"<TDD-IDO>"+this.variables.getIDO()+"</TDD-IDO>"
                       +"<TDD-IDD>"+this.variables.getIDD()+"</TDD-IDD>"
                       +"<TDD-10D>"+this.variables.getDigitos()+"</TDD-10D>"

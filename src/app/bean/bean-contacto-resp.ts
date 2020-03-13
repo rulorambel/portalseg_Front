@@ -1,7 +1,7 @@
 import { Contacto } from './bean-contacto';
 
 export interface RespuestaContacto {
-    codigo: String;
-    mensaje: String;
+    codigo: string;
+    mensaje: string;
     data: Contacto[];
 }
