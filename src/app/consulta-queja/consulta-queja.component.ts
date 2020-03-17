@@ -73,10 +73,10 @@ consultaQueja(queja)
     this.servhttp.consultaQueja(parametros)
        .subscribe(data=>{
         this.visibleLoad=false;
-        if(data[0]["mensaje"]=="Correcto" )
+        if(data["codigo"]=="0" )
                            {
                              
-                             this.dataSource  =  new MatTableDataSource<Queja>(data)  ;
+                             this.dataSource  =  new MatTableDataSource<Queja>(data['data']) ;
                              this.dataSource.paginator = this.paginator;
                            }
                         else{

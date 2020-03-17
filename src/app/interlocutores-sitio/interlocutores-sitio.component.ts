@@ -109,17 +109,17 @@ constructor(  public servhttp : ServicioHttpService ,
       .subscribe(data=>{
         this.visibleLoad=false;
 
-        if(data[0].mensaje =="Correcto") 
+        if(data.codigo =="0") 
         {
-          this.dataSource  =  new MatTableDataSource<Contacto>(data)  ;
+          this.dataSource  =  new MatTableDataSource<Contacto>(data['data'])  ;
           this.dataSource.paginator = this.paginator;
       
         }
-        else if (data[0].mensaje=="Error")
+        else if (data.mensaje=="Error")
         {
           this.variables.muestraBarra("Ocurrio un error interno, por favor intentalo más tarde", "ERROR");
         }else{
-           this.variables.muestraBarra(data[0].mensaje, "Msg");
+           this.variables.muestraBarra(data.mensaje, "Msg");
         }
 
       });

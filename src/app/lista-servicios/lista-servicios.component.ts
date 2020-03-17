@@ -25,6 +25,8 @@ import {DialogConfirmaInterconeccionComponent} from '../dialog-confirma-intercon
 import { Interconeccion } from '../bean/bean-interconeccion';
 import {DialogAltaInterconeccionComponent } from '../dialog-alta-interconeccion/dialog-alta-interconeccion.component';
 import { DialogAltaCmpComponent } from '../dialog-alta-cmp/dialog-alta-cmp.component';
+import { RespuestaReferencia } from '../bean/bean-referencia-resp';
+import { RespuestaInterconeccion } from '../bean/bean-interconeccion-resp';
 
 
 @Component({
@@ -102,7 +104,10 @@ export class ListaServiciosComponent {
             {
               case  "INX":
                 //Ejecuta las validaciones y flujo para Interacciones
-                this.consultaInterconecciones(strFolio);
+                if(this.esNumero(strFolio))
+                  this.consultaInterconecciones(strFolio);
+                else
+                  this.consultaServicios(strFolio);
               break;
               case  "CMP":
                 //Ejecuta las validaciones y flujo para Compartición
@@ -183,11 +188,11 @@ public consultaServicios(referencias:string)
 *   @return:      .
 *
 **************************************************************************************/
- public mostrarSetPantalla(Servicios: Referencia[]  )
+ public mostrarSetPantalla(Servicios: RespuestaReferencia)
  {
-    if (Servicios[0]["mensaje"]=="Correcto")
+    if (Servicios["codigo"]=="0")
     {
-      this.dataSource  =  new MatTableDataSource<Referencia>(Servicios)  ;
+      this.dataSource  =  new MatTableDataSource<Referencia>(Servicios['data'])  ;
       this.dataSource.paginator = this.paginator;    
     } else
     {
@@ -211,8 +216,6 @@ public consultaServicios(referencias:string)
 public consultaInterconecciones(pNumeroTelefonico:string)
 {
  console.log("Que llego " + pNumeroTelefonico)
-  if(this.esNumero(pNumeroTelefonico))
-  {
     let parametros = new HttpParams()
       .set("cuc",this.variables.getCUC())
       .set("numero",pNumeroTelefonico);
@@ -220,11 +223,7 @@ public consultaInterconecciones(pNumeroTelefonico:string)
     this.serviciohttp.consultaInterconeccion(parametros)
       .subscribe(  Respuesta =>{ this.evaluaRespConsultaInterconeccion (Respuesta); });
       
-  }
-  else{
-    this.variables.muestraBarra("Para buscar una interconexión debes introducir el número teléfonico", "ERROR");
-  }
-
+  
 }
 
 /**************************************************************************************  
@@ -242,24 +241,24 @@ public consultaInterconecciones(pNumeroTelefonico:string)
 *   @return:      .
 *
 **************************************************************************************/
-public  evaluaRespConsultaInterconeccion (data :Interconeccion[]) 
+public  evaluaRespConsultaInterconeccion (data : RespuestaInterconeccion) 
 {
-  console.log( data[0]["mensaje"] );
-   if(data[0]["mensaje"]=="Correcto")
+  console.log( data["codigo"],  data["mensaje"]);
+   if(data["codigo"]=="0")
     {
 
       console.log("dentro del if ");
-      console.log(data[0]);
+      console.log(data['data'][0]);
       
-      if(data[0]["validacion"]=="No")
+      if(data['data'][0]["validacion"]=="No")
       {
-        let dlg = this.abrirConfAltaCatInter(data[0]);
-          dlg.afterClosed().subscribe( Formulario=>{ this.RespConfimacionAltaInter(Formulario,data[0] );  });
+        let dlg = this.abrirConfAltaCatInter(data['data'][0]);
+          dlg.afterClosed().subscribe( Formulario=>{ this.RespConfimacionAltaInter(Formulario,data['data'][0] );  });
       }
       else if(data[0]["validacion"]=="Si")
       { console.log("si");
-      console.log(data[0]);
-      this.llenaSetReferencia( null, data[0] , "Si")
+      console.log(data['data'][0]);
+      this.llenaSetReferencia( null, data['data'][0] , "Si")
       }
   }
   else{
@@ -307,38 +306,43 @@ public RespConfimacionAltaInter(pFormulario : any , data : Interconeccion)
 
 public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacion : string)
 {
-  let referencias:Referencia[];
-console.log (data);
+  let referencias:RespuestaReferencia;
+  console.log (data);
   if(validacion=="Si")
     {
-        referencias =   [{
-             referencia:"TNT"+ data["noNal"] ,
-             CUCEmpresarial: this.variables.getCUC(),
-             cliente:data["empresa"]   ,
-             folio: "" ,
-             familia: "",
-             puntas: "" ,
-             domicilio:data["central"],
-             empresa:data["empresa"] ,
-             mensaje:"Correcto"
-           }];
+        referencias = {
+          'codigo': "0",
+          'mensaje': 'Correcto',
+          'data': [{
+            referencia:"TNT"+ "-" + data["noNal"] ,
+            CUCEmpresarial: this.variables.getCUC(),
+            cliente:data["empresa"]   ,
+            folio: "" ,
+            familia: "",
+            puntas: "" ,
+            domicilio:data["central"],
+            empresa:data["empresa"] ,
+          }]
+        };
   }
   else{
     console.log("Enmtar en el no " ) ;
     console.log(pFormulario)
-        referencias = [{
-          referencia:pFormulario.value["Tipo"] + data["noNal"] ,
-          CUCEmpresarial: this.variables.getCUC(),
-          cliente:data["empresa"]   ,
-          folio: "" ,
-          familia: "",
-          puntas: "" ,
-          domicilio:pFormulario.value["CiudadOrigen"]+"/" + pFormulario.value["CiudadDestino"],
-          empresa:data["empresa"] ,
-          mensaje:"Correcto"
-         }];
+        referencias = {
+          'codigo': "0",
+          'mensaje': 'Correcto',
+          'data':  [{
+            referencia:pFormulario.value["Tipo"] + "-" + data["noNal"] ,
+            CUCEmpresarial: this.variables.getCUC(),
+            cliente:data["empresa"]   ,
+            folio: "" ,
+            familia: "",
+            puntas: "" ,
+            domicilio:pFormulario.value["CiudadOrigen"]+"/" + pFormulario.value["CiudadDestino"],
+            empresa:data["empresa"] ,
+           }]
+        };
     }
-
     this.mostrarSetPantalla(referencias);
 
 }
@@ -398,9 +402,9 @@ console.log (data);
       this.serviciohttp.consultaQueja(parametros)
         .subscribe(data=>{
                           dlg.close();
-                           if (data[0]["mensaje"]== "Correcto")
+                           if (data["codigo"]== "0")
                             {
-                              this.variables.setQuejaSeleccionada( data[0] );
+                              this.variables.setQuejaSeleccionada( data['data'][0] );
                               this.cambiaConsulta.emit();          
                             }
                             else 
@@ -629,9 +633,9 @@ public consultaServiciosCMP(referencias:string)
              
                   this.disabled_btnBuscar=false;
                   this.visibleLoad =false;
-                  if (data[0]["mensaje"]=="Correcto")
+                  if (data["codigo"]=="0")
                   {
-                    this.dataSource  =  new MatTableDataSource<Referencia>(data)  ;
+                    this.dataSource  =  new MatTableDataSource<Referencia>(data['data'])  ;
                     this.dataSource.paginator = this.paginator;
                   } else{
                     this.variables.muestraBarra("no encontramos datos en nuestra lista de servicios", "ERROR");
