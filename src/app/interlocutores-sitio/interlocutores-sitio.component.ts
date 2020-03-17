@@ -66,7 +66,7 @@ constructor(  public servhttp : ServicioHttpService ,
         }
         else if (this.variables.getTipoServicio()=="AUX")
         {
-          this.Obligatorio=false
+          this.Obligatorio=true
       
       } 
          

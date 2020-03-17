@@ -1,8 +1,9 @@
 
 /**************************************************************************************  <
-*   @Author:		  RuloRamBel
-*   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*
+*   @Author:		  Anahi Flores
+*   @Date:		    17/03/2020  
+*   @update:      17/03/2020  
 *   @Version:      1.0
 *   @Class       AltaQuejaComponent
 *-------------------------------------------------------------------------------------
@@ -13,7 +14,6 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpParams} from '@angular/common/http';
 import { FormControl,Validators,  FormGroup} from '@angular/forms';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import { DialogInformComponent} from '../dialog-inform/dialog-inform.component';
 import { ServicioHttpService} from'../servicio-http.service';
 import { InterlocutoresSitioComponent} from '../interlocutores-sitio/interlocutores-sitio.component';
 import { ServicioVarialesGlobalesService} from '../servicio-variales-globales.service';
@@ -22,13 +22,13 @@ import { DatePipe } from '@angular/common';
 
 
 @Component({
-  selector: 'app-alta-queja',
-  templateUrl: './alta-queja.component.html',
-  styleUrls: ['./alta-queja.component.css']
+  selector: 'app-alta-queja-aux',
+  templateUrl: './alta-queja-aux.component.html',
+  styleUrls: ['./alta-queja-aux.component.css']
 })
 
 
-export class AltaQuejaComponent implements OnInit {
+export class AltaQuejaAUXComponent implements OnInit {
   FormularioAlta:FormGroup;
   disabled_btnCreaQueja:string="false";
  

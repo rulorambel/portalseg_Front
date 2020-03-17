@@ -1,0 +1,44 @@
+.buttons{
+    border: 1px solid ;
+    border-color: #029ed9;
+    border-radius: 10px;
+    }
+    .buttons:hover {
+      border: 1px solid ;
+      border-color: CDCDCD;
+      border-radius: 10px;
+      background-color: #029ed9;
+      color: white;
+  }
+  
+  .divcabecera{
+    border-bottom: 1px solid black;
+    background-color:#CDCDCD;
+    width: 100%;
+    font-size :16px;
+    padding-top: 5px;
+  }
+  .lblcabecera{
+  font-size: 16px;
+  color: black;
+  padding-left: 5px;
+  }
+  
+  
+  #detacuserecibo{width: 100%;}
+  #detacuserecibo tr:nth-child(even){background-color: #E9E9E9;}
+  #detacuserecibo tr:hover {background-color:  #CDCDCD;}
+  #detacuserecibo th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      font-size: 14px;  
+      background-color: #029ed9;
+      color: white;
+    }
+  
+    .validadorerror
+    {
+      font-size: 11px;
+      color: red;
+   
+    }
