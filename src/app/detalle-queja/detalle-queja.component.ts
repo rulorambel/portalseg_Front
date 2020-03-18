@@ -43,6 +43,7 @@ export class DetalleQuejaComponent  {
     Prioridad:string;
     Estado:string;
     validacionCliente :boolean=false;
+    disabled_SIPO : boolean = false;
 
 
 
@@ -83,6 +84,8 @@ export class DetalleQuejaComponent  {
     this.HorarioAcceso = queja["horarioAcceso"];
     this.Prioridad  = queja["prioridad"] ;
     this.Estado  = queja["estadoGlobal"] ;
+    
+    this.disabled_SIPO = queja["notificadoPor"] == "SIPO";
     
     if ( queja["validacionCliente"] == "true")
     this.validacionCliente  = true; 

@@ -29,7 +29,7 @@ import {DetalleQuejaComponent} from '../detalle-queja/detalle-queja.component'
 
 
 export class ConsultaQuejaComponent {
-  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha' ];
+  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha', 'callback.type'];
   dataSource: any ;
   Mensaje : string;
   esvisibleDetalle :boolean=false;
@@ -139,10 +139,10 @@ private regresaServiciosValidos()
       servicio = "\"ENLACE DEDICADO\"";
     break;
     case 'INX':
-      servicio = "\"INTERCONEXION\"";
+      servicio = "\"INTERCONEXION\", \"PORTABILIDAD\", , \"TRAFICO\"";
     break;
     case 'AUX':
-      servicio = "\"PORTABILIDAD\",\"DESAGREGACION\",\"SOPORTE UNINET\"";
+      servicio = "\"DESAGREGACION\",\"SOPORTE UNINET\"";
     break;
     case 'CMP':
       servicio = "\"COUBICACION\",\"COMPARTICION\",\"SOPORTE UNINET\"";
@@ -242,7 +242,8 @@ limpiaQueja(queja)
     prioridad:  queja.prioridad,
     problemaReportado: queja.problemaReportado,
     referencia:queja.referencia,
-    validacionCliente: queja.validacionCliente
+    validacionCliente: queja.validacionCliente,  
+    notificadoPor: queja.notificadoPor
 
   }]; 
     
