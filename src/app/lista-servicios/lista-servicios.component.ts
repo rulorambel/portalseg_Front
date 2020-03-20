@@ -42,6 +42,7 @@ export class ListaServiciosComponent {
   visibleLoad :boolean=false;
   dataSource : any;
   strArchivo :string;
+  valor: string;
   
 
   @Output() cambiaAlta = new EventEmitter();
@@ -91,14 +92,18 @@ export class ListaServiciosComponent {
 **************************************************************************************/
 
   public ejecutaBusqueda(strFolio)
+  
   { 
     this.valoresPreBusqueda();
     if (strFolio === "" || strFolio===undefined || strFolio ===null )
       {
         this.variables.muestraBarra("Necesitamos una Referencia para iniciar la busqueda","MSG");
+      } else if (!this.validaMnemonico(strFolio)) {
+        this.variables.muestraBarra("Referencia ingresada no pertenece al Tipo de Servicio indicado","MSG");
       }
       else 
       {
+        // this.valor = strFolio.substr(0,3);
             let TipoServicio : string = this.variables.getTipoServicio();
             switch(TipoServicio)
             {
@@ -169,7 +174,8 @@ public consultaServicios(referencias:string)
   let parametro:string = "ref.Sisa isin {\""+ referencias.replace(/,/g,"\",\"") +"\"} and CucEmp=\""+this.variables.getCUC()+"\" ";
   
   let parametros = new HttpParams()
-   .set("querry",parametro);
+   .set("querry",parametro)
+   /*.set("valor", this.valor)*/;
         
   this.serviciohttp.consultaReferencias(parametros)
     .subscribe(Servicios =>{this.mostrarSetPantalla(Servicios)});     
@@ -218,7 +224,8 @@ public consultaInterconecciones(pNumeroTelefonico:string)
  console.log("Que llego " + pNumeroTelefonico)
     let parametros = new HttpParams()
       .set("cuc",this.variables.getCUC())
-      .set("numero",pNumeroTelefonico);
+      .set("numero",pNumeroTelefonico)
+      /*.set("valor", this.valor)*/;
   
     this.serviciohttp.consultaInterconeccion(parametros)
       .subscribe(  Respuesta =>{ this.evaluaRespConsultaInterconeccion (Respuesta); });
@@ -301,9 +308,6 @@ public RespConfimacionAltaInter(pFormulario : any , data : Interconeccion)
 *   @return:     
 *
 **************************************************************************************/
-
-
-
 public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacion : string)
 {
   let referencias:RespuestaReferencia;
@@ -553,9 +557,6 @@ public abrirConfAltaCatInter(setData:Interconeccion)
  return dlgn;
 }
 
-
-
-
 public abrirAltaInterconeccion(setData:Interconeccion)
 {
     let config = new MatDialogConfig();
@@ -652,5 +653,39 @@ public llenaSetReferenciaCMP( resp : any)
       this.consultaServiciosCMP(this.variables.getIdNis())
     }
 }
+
+/**************************************************************************************  
+*  Válida que el nemonico de la Referencia de acuerdo aL Tipo de Servicio
+*
+*   @Author:		Anahi Flores
+*   @Date:		    19/03/2020
+*   @update:      20/03/2020  
+*   @Version:     1.0
+*   @Funcion      validaNemonico
+*  	@param:		      
+*-------------------------------------------------------------------------------------
+*   @return:      .
+*
+**************************************************************************************/
+
+  public validaMnemonico(str:string) {
+    this.valor = str.substr(0,3);
+    let enlaces = ["A01","A02", "A03", "A04", "A06", "A08", "A12", "A16","A32", "C00", "C01", "C02", "C03", "C04", "C05", "C07", "C15", "C1G", "C20", "C30", "C40", "C50", "C75", "CB2", "CB4", "CB6", "D01", "D02", "D03", "D04", "D06", "D08", "D12", "D16", "D32", "D34", "DS0", "DS3", "E0-", "E1-", "E1P", "F10","F20", "F30", "F40", "F50", "F60", "F90", "FB2", "FB4"]
+    let interconexiones = ["E1C","E1L", "E1X", "E1Z", "OTA", "ESC", "1GL", "1SL", "TC1", "1GI", "1SI", "E17", "E1D", "E1I", "E1N", "E1R", "E1T", "E1U", "ERL", "ES7", "ESL", "OT-", "OTZ", "EZC", "TS1", "PGC", "PIL", "PLC", "XCC", "XCR", "XOC", "XOR", "XRC", "PRE", "PRS", "PCO", "PGA", "PGO", "PHA", "PHC", "PHO", "PIA", "PIC", "PID", "PIE", "PIO", "PIS", "PS7", "PSC", "PSD", "PSR", "XOT", "XRR", "XSC", "XSR", "PTC", "P1L", "P1O", "PCS", "PNA", "PCC", "PGL", "PHL", "CBL", "CC2", "CBC", "CBD", "CBX", "CL2", "CBP", "CBT" ];
+    let comparticion = ["NIS"]
+    let auxiliares = ["NCA"]
+    let tipoServicio = this.variables.getTipoServicio();
+    if(enlaces.includes(this.valor) && tipoServicio == "LE"){
+      return true;
+    } else if ((interconexiones.includes(this.valor) || this.esNumero(str)) && tipoServicio == "INX") {
+      return true;
+    }else if (comparticion.includes(this.valor) && tipoServicio == "CMP") {
+      return true;
+    }else if (auxiliares.includes(this.valor) && tipoServicio == "AUX") {
+      return true;
+    }
+
+    return false;
+  }
 
 }
