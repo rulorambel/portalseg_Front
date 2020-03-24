@@ -90,17 +90,16 @@ export class ListaServiciosComponent {
 *   @return:      .
 *
 **************************************************************************************/
-
-  public ejecutaBusqueda(strFolio)
+public ejecutaBusqueda(strFolio)
   
   { 
     this.valoresPreBusqueda();
     if (strFolio === "" || strFolio===undefined || strFolio ===null )
       {
         this.variables.muestraBarra("Necesitamos una Referencia para iniciar la busqueda","MSG");
-      } else if (!this.validaMnemonico(strFolio)) {
+      } /*else if (!this.validaMnemonico(strFolio)) {
         this.variables.muestraBarra("Referencia ingresada no pertenece al Tipo de Servicio indicado","MSG");
-      }
+      }*/
       else 
       {
         // this.valor = strFolio.substr(0,3);
@@ -160,7 +159,7 @@ export class ListaServiciosComponent {
 *
 *   @Author:		RuloRamBel
 *   @Date:		  26/12/2019
-*   @update:    26/12/2019  
+*   @update:    24/03/2020  
 *   @Version:   1.0
 *   @Funcion    consultaServicios
 *  	@param:		  referencia = cadena de referencias que se requieren buscar, deben de estar separadas por Coma :","  
@@ -171,11 +170,12 @@ export class ListaServiciosComponent {
 public consultaServicios(referencias:string)
 {
 
-  let parametro:string = "ref.Sisa isin {\""+ referencias.replace(/,/g,"\",\"") +"\"} and CucEmp=\""+this.variables.getCUC()+"\" ";
+  let parametro:string = "\""+ referencias.replace(/,/g,"\",\"") +"\"";
   
   let parametros = new HttpParams()
    .set("querry",parametro)
-   /*.set("valor", this.valor)*/;
+   .set("siglas", this.variables.getTipoServicio())
+   .set("cuc", this.variables.getCUC());
         
   this.serviciohttp.consultaReferencias(parametros)
     .subscribe(Servicios =>{this.mostrarSetPantalla(Servicios)});     
@@ -666,7 +666,7 @@ public llenaSetReferenciaCMP( resp : any)
 *-------------------------------------------------------------------------------------
 *   @return:      .
 *
-**************************************************************************************/
+*************************************************************************************
 
   public validaMnemonico(str:string) {
     this.valor = str.substr(0,3);
@@ -686,6 +686,6 @@ public llenaSetReferenciaCMP( resp : any)
     }
 
     return false;
-  }
+  }*/
 
 }
