@@ -612,8 +612,8 @@ public consultaComparticion(referencias:string)
       this.variables.setIdNis(referencias);
       console.log (this.variables.getTipoServicio());
       this.consultaServiciosCMP(referencias);
-      //let dlg = this.abreDialogoAltaComparticion(); 
-      //dlg.afterClosed().subscribe(Respuesta=> { this.llenaSetReferenciaCMP(Respuesta)} );
+      let dlg = this.abreDialogoAltaComparticion(); 
+      dlg.afterClosed().subscribe(Respuesta=> { this.llenaSetReferenciaCMP(Respuesta)} );
     } else {
       this.variables.muestraBarra("Referencia no valida para servicios de Compartición","MSG");
     }
