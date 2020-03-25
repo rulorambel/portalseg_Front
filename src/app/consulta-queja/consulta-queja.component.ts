@@ -139,13 +139,13 @@ private regresaServiciosValidos()
       servicio = "\"ENLACE DEDICADO\"";
     break;
     case 'INX':
-      servicio = "\"INTERCONEXION\", \"PORTABILIDAD\", , \"TRAFICO\"";
+      servicio = "\"INTERCONEXION\", \"PORTABILIDAD\", \"TRAFICO\", \"COUBICACION\"";
     break;
     case 'AUX':
       servicio = "\"DESAGREGACION\",\"SOPORTE UNINET\"";
     break;
     case 'CMP':
-      servicio = "\"COUBICACION\",\"COMPARTICION\",\"SOPORTE UNINET\"";
+      servicio = "\"COMPARTICION\"";
     break;
   }
 

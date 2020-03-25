@@ -597,7 +597,7 @@ public valoresPostBusqueda()
 *
 *   @Author:		AnahI Flores
 *   @Date:		  03/03/2020
-*   @update:    03/03/2020  
+*   @update:    25/03/2020  
 *   @Version:   1.0
 *   @Funcion    consultaComparticion
 *  	@param:		  referencia = cadena de referencias que se requieren buscar, deben de estar separadas por Coma :","  
@@ -611,8 +611,9 @@ public consultaComparticion(referencias:string)
     if(referencias.startsWith("NIS-") && referencias.length == 17) {
       this.variables.setIdNis(referencias);
       console.log (this.variables.getTipoServicio());
-      let dlg = this.abreDialogoAltaComparticion(); 
-      dlg.afterClosed().subscribe(Respuesta=> { this.llenaSetReferenciaCMP(Respuesta)} );
+      this.consultaServiciosCMP(referencias);
+      //let dlg = this.abreDialogoAltaComparticion(); 
+      //dlg.afterClosed().subscribe(Respuesta=> { this.llenaSetReferenciaCMP(Respuesta)} );
     } else {
       this.variables.muestraBarra("Referencia no valida para servicios de Compartición","MSG");
     }
@@ -623,10 +624,12 @@ public consultaComparticion(referencias:string)
 public consultaServiciosCMP(referencias:string)
 {
 
-  let parametro:string = "nis=\""+ referencias.replace(/,/g,"\",\"") +"\" and CucEmp=\""+this.variables.getCUC()+"\" ";
+  let parametro:string = "\""+ referencias.replace(/,/g,"\",\"") +"\"";
   
   let parametros = new HttpParams()
-   .set("querry",parametro);
+   .set("querry",parametro)
+   .set("siglas", this.variables.getTipoServicio())
+   .set("cuc", this.variables.getCUC());
         
   this.serviciohttp.consultaReferencias(parametros)
     .subscribe(
