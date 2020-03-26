@@ -63,12 +63,20 @@ consultaQueja(queja)
 
   this.limpiaComponente();
   this.visibleLoad=true;
-  let parametro:string = this.armaStrQuerry(queja);
+  
+  let parametro:string = ""; 
 
-
+  if (queja != "")
+  
+  parametro="\""+ queja.replace(/,/g,"\",\"") +"\"";
   
   let parametros = new HttpParams()
-     .set("querry",parametro);
+   .set("querry",parametro)
+   .set("siglas", "\""+ this.variables.getTipoServicio() +"\"")
+   .set("cuc", this.variables.getCUC())
+   .set("referencia", "\"SIPO\",\"SEG\"")
+   .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
+        
  
     this.servhttp.consultaQueja(parametros)
        .subscribe(data=>{
@@ -103,6 +111,7 @@ consultaQueja(queja)
 
 private armaStrQuerry(strQuejas)
 {
+  
   let querry:string ="";
     
   if (strQuejas==="" || strQuejas ===undefined)
