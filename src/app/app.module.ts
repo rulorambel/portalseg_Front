@@ -23,6 +23,7 @@ import { LoadComponent } from './carga-lenta/load.component';
 import { DialogConfirmaInterconeccionComponent } from './dialog-confirma-interconeccion/dialog-confirma-interconeccion.component';
 import { DialogAltaInterconeccionComponent } from './dialog-alta-interconeccion/dialog-alta-interconeccion.component';
 import { AltaQuejaInxComponent } from './alta-queja-inx/alta-queja-inx.component';
+import { AltaQuejaAUXComponent } from './alta-queja-aux/alta-queja-aux.component';
 import { DialogAltaCmpComponent } from './dialog-alta-cmp/dialog-alta-cmp.component';
 
 
@@ -42,7 +43,8 @@ import { DialogAltaCmpComponent } from './dialog-alta-cmp/dialog-alta-cmp.compon
     DialogConfirmaInterconeccionComponent,
     DialogAltaInterconeccionComponent,
     AltaQuejaInxComponent,
-    DialogAltaCmpComponent
+    DialogAltaCmpComponent,
+    AltaQuejaAUXComponent
   ],
   imports: [
     BrowserModule,

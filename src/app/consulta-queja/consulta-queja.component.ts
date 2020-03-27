@@ -29,7 +29,7 @@ import {DetalleQuejaComponent} from '../detalle-queja/detalle-queja.component'
 
 
 export class ConsultaQuejaComponent {
-  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha' ];
+  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha', 'callback.type'];
   dataSource: any ;
   Mensaje : string;
   esvisibleDetalle :boolean=false;
@@ -63,12 +63,20 @@ consultaQueja(queja)
 
   this.limpiaComponente();
   this.visibleLoad=true;
-  let parametro:string = this.armaStrQuerry(queja);
+  
+  let parametro:string = ""; 
 
-
+  if (queja != "")
+  
+  parametro="\""+ queja.replace(/,/g,"\",\"") +"\"";
   
   let parametros = new HttpParams()
-     .set("querry",parametro);
+   .set("querry",parametro)
+   .set("siglas", "\""+ this.variables.getTipoServicio() +"\"")
+   .set("cuc", this.variables.getCUC())
+   .set("referencia", "\"SIPO\",\"SEG\"")
+   .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
+        
  
     this.servhttp.consultaQueja(parametros)
        .subscribe(data=>{
@@ -103,6 +111,7 @@ consultaQueja(queja)
 
 private armaStrQuerry(strQuejas)
 {
+  
   let querry:string ="";
     
   if (strQuejas==="" || strQuejas ===undefined)
@@ -139,13 +148,13 @@ private regresaServiciosValidos()
       servicio = "\"ENLACE DEDICADO\"";
     break;
     case 'INX':
-      servicio = "\"INTERCONEXION\"";
+      servicio = "\"INTERCONEXION\", \"PORTABILIDAD\", \"TRAFICO\", \"COUBICACION\"";
     break;
     case 'AUX':
-      servicio = "\"PORTABILIDAD\",\"DESAGREGACION\",\"SOPORTE UNINET\"";
+      servicio = "\"DESAGREGACION\",\"SOPORTE UNINET\"";
     break;
     case 'CMP':
-      servicio = "\"COUBICACION\",\"COMPARTICION\",\"SOPORTE UNINET\"";
+      servicio = "\"COMPARTICION\"";
     break;
   }
 
@@ -242,7 +251,8 @@ limpiaQueja(queja)
     prioridad:  queja.prioridad,
     problemaReportado: queja.problemaReportado,
     referencia:queja.referencia,
-    validacionCliente: queja.validacionCliente
+    validacionCliente: queja.validacionCliente,  
+    notificadoPor: queja.notificadoPor
 
   }]; 
     

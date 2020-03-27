@@ -6,6 +6,7 @@ import { ConsultaQuejaComponent } from '../consulta-queja/consulta-queja.compone
 import { ServicioVarialesGlobalesService} from '../servicio-variales-globales.service';
 import { ServicioHttpService } from '../servicio-http.service'; 
 import { AltaQuejaInxComponent } from '../alta-queja-inx/alta-queja-inx.component'
+import { AltaQuejaAUXComponent } from '../alta-queja-aux/alta-queja-aux.component'
 
 
 @Component({
@@ -19,11 +20,13 @@ export class PrincipalComponent {
   @ViewChild(AltaQuejaCMPComponent,{static: false}) altaCMP: AltaQuejaCMPComponent;
   @ViewChild(ConsultaQuejaComponent,{static: false}) consulta: ConsultaQuejaComponent;
   @ViewChild(AltaQuejaInxComponent,{static: false}) altaInx: AltaQuejaInxComponent;
+  @ViewChild(AltaQuejaAUXComponent,{static: false}) altaAUX: AltaQuejaAUXComponent;
 
   step = 0;
   esvisibleAltaCMP :boolean=false;
   esvisibleAlta :boolean=false;
   esvisibleAltaInx :boolean=false;
+  esvisibleAltaAUX :boolean=false;
 
 
   constructor(private rutaActiva: ActivatedRoute ,
@@ -48,14 +51,7 @@ export class PrincipalComponent {
       this.ruta.navigateByUrl("portalseg/error");
     }
     else{
-      //let parametros = new HttpParams()
-      // .set("subtiposerv",TipoServicio);
-
-       //this.serviciohttp.consultaServicios(parametros)
-        //.subscribe(data=>
-          //{        
-            //this.variables.setServiciosValidos(data);
-          //});
+      
 
           this.variables.setTipoServicio ( TipoServicio); 
 
@@ -64,6 +60,7 @@ export class PrincipalComponent {
               this.esvisibleAltaCMP = true;
               this.esvisibleAlta=false;
               this.esvisibleAltaInx = false;
+              this.esvisibleAltaInx = false;
             }
             
             if (TipoServicio == "INX")
@@ -71,6 +68,7 @@ export class PrincipalComponent {
               this.esvisibleAltaInx = true;
               this.esvisibleAltaCMP=false;
               this.esvisibleAlta=false;
+              this.esvisibleAltaAUX = false;
             }
 
             if (TipoServicio == "LE")
@@ -78,6 +76,15 @@ export class PrincipalComponent {
               this.esvisibleAltaInx = false;
               this.esvisibleAltaCMP=false;
               this.esvisibleAlta=true;
+              this.esvisibleAltaInx = false;
+            }
+            if (TipoServicio == "AUX")
+            {
+              this.esvisibleAltaCMP = false;
+              this.esvisibleAlta=false;
+              this.esvisibleAltaInx = false;
+              this.esvisibleAltaAUX = true;
+
             }
             
             
