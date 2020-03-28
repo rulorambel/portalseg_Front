@@ -262,7 +262,7 @@ public  evaluaRespConsultaInterconeccion (data : RespuestaInterconeccion)
         let dlg = this.abrirConfAltaCatInter(data['data'][0]);
           dlg.afterClosed().subscribe( Formulario=>{ this.RespConfimacionAltaInter(Formulario,data['data'][0] );  });
       }
-      else if(data[0]["validacion"]=="Si")
+      else if(data['data'][0]["validacion"]=="Si")
       { console.log("si");
       console.log(data['data'][0]);
       this.llenaSetReferencia( null, data['data'][0] , "Si")
@@ -383,7 +383,7 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
 *
 *   @Author:		RuloRamBel
 *   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*   @update:      27/03/2020  
 *   @Version:      1.0
 *   @Funcion       limpiaComponentes
 *  	@param:		      
@@ -397,11 +397,19 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
       let dlg = this.abreCarga();
       this.limpiaComponentes();
       const referencia :string= obj["referencia"];
-      const parametro:string = "affected.item = \""+ referencia+ "\" and  ~(open =\"Cerrada\" or open =\"Cerrado\" or open =\"Cancelada\")";
+      //const parametro:string = "affected.item = \""+ referencia+ "\" and  ~(open =\"Cerrada\" or open =\"Cerrado\" or open =\"Cancelada\")";
       this.variables.setReferenciaSelecionada(obj["referencia"]);
+
+      let parametro:string = ""; 
+
+      if (referencia != "")
+      
+      parametro="\""+ referencia.replace(/,/g,"\",\"") +"\"";
      
       let parametros = new HttpParams()
-      .set("querry",parametro);
+      .set("referencia",parametro)
+      //.set("callback", "\"SIPO\",\"SEG\"")
+      .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
   
       this.serviciohttp.consultaQueja(parametros)
         .subscribe(data=>{
