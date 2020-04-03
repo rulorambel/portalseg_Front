@@ -26,8 +26,8 @@ export class ServicioVarialesGlobalesService {
   private Celular  :string;
   private Origen  :string;
   private Destino  :string;
-  private Origen2  :string;
-  private Destino2  :string;
+  private centralOrigen  :string;
+  private centralDestino :string;
   private ipOrigen :string;
   private ipDestino :string;
   private IDO :string;
@@ -42,7 +42,7 @@ export class ServicioVarialesGlobalesService {
   private TipoElemento :string
   private BndAlta: boolean;
 
-
+  
   constructor( private snack : MatSnackBar ) { }
 
   public setEmpresasSelecionadas(data : Empresa[] )
@@ -220,22 +220,22 @@ public getDestino()
   return typeof this.Destino == 'undefined' ? '' : this.Destino;
 }
 
-public setOrigen2(pOrigen:string)
+public setcentralOrigen(pcentralOrigen:string)
 {
-  this.Origen2 = pOrigen;
+  this.centralOrigen = pcentralOrigen;
 }
-public getOrigen2()
+public getcentralOrigen()
 {
-  return typeof this.Origen2 == 'undefined' ? '' : this.Origen2;
+  return typeof this.centralOrigen == 'undefined' ? '' : this.centralOrigen;
 }
 
-public setDestino2(pDestino:string)
+public setcentralDestino(pcentralDestino:string)
 {
-  this.Destino2 = pDestino;
+  this.centralDestino = pcentralDestino;
 }
-public getDestino2()
+public getcentralDestino()
 {
-  return typeof this.Destino2 == 'undefined' ? '' : this.Destino2;
+  return typeof this.centralDestino == 'undefined' ? '' : this.centralDestino;
 }
 
 public setipOrigen(pipOrigen:string)
@@ -368,5 +368,29 @@ public getIdElemento ()
   public getBndAlta(){
     return this.BndAlta;
   }
+
+  /**************************************************************************************  
+*   Permite unicamente digitos
+*
+*   @Author:		Anahi Flores
+*   @Date:		  31/03/2020
+*   @update:    31/03/2020 
+*   @Version:   1.0
+*   @Funcion    numberOnly
+*  	@param:		  
+*-------------------------------------------------------------------------------------
+*   @return:     
+*
+**************************************************************************************/
+
+public numberOnly(event): boolean {
+  const charCode = (event.which) ? event.which : event.keyCode;
+  console.log(charCode);
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
+
+}
 }
 

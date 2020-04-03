@@ -43,6 +43,7 @@ export class ListaServiciosComponent {
   dataSource : any;
   strArchivo :string;
   valor: string;
+  tipo: string;
   
 
   @Output() cambiaAlta = new EventEmitter();
@@ -259,14 +260,16 @@ public  evaluaRespConsultaInterconeccion (data : RespuestaInterconeccion)
       
       if(data['data'][0]["validacion"]=="No")
       {
-        let dlg = this.abrirConfAltaCatInter(data['data'][0]);
-          dlg.afterClosed().subscribe( Formulario=>{ this.RespConfimacionAltaInter(Formulario,data['data'][0] );  });
+        this.tipo = 'PNT';
       }
       else if(data['data'][0]["validacion"]=="Si")
       { console.log("si");
-      console.log(data['data'][0]);
-      this.llenaSetReferencia( null, data['data'][0] , "Si")
+        this.tipo = 'TNT';
+        console.log(data['data'][0]);
+        // this.llenaSetReferencia( null, data['data'][0] , "Si")
       }
+      let dlg = this.abrirConfAltaCatInter(data['data'][0]);
+      dlg.afterClosed().subscribe( Formulario=>{ this.RespConfimacionAltaInter(Formulario,data['data'][0] );  });
   }
   else{
     this.variables.muestraBarra("El número no existe en nuestra lista de servicios ","MSG");
@@ -312,7 +315,7 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
 {
   let referencias:RespuestaReferencia;
   console.log (data);
-  if(validacion=="Si")
+  /*if(validacion=="Si")
     {
         referencias = {
           'codigo': "0",
@@ -329,26 +332,29 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
           }]
         };
   }
-  else{
-    console.log("Enmtar en el no " ) ;
-    console.log(pFormulario)
-        referencias = {
-          'codigo': "0",
-          'mensaje': 'Correcto',
-          'data':  [{
-            referencia:pFormulario.value["Tipo"] + "-" + data["noNal"] ,
-            CUCEmpresarial: this.variables.getCUC(),
-            cliente:data["empresa"]   ,
-            folio: "" ,
-            familia: "",
-            puntas: "" ,
-            domicilio:pFormulario.value["CiudadOrigen"]+"/" + pFormulario.value["CiudadDestino"],
-            empresa:data["empresa"] ,
-           }]
-        };
-    }
-    this.mostrarSetPantalla(referencias);
-
+  else{*/
+    
+    if(this.variables.getBndAlta())
+    {
+      console.log(pFormulario)
+      referencias = {
+        'codigo': "0",
+        'mensaje': 'Correcto',
+        'data':  [{
+          referencia:pFormulario.value["Tipo"] + "-" + data["noNal"] ,
+          CUCEmpresarial: this.variables.getCUC(),
+          cliente:data["empresa"]   ,
+          folio: "" ,
+          familia: "",
+          puntas: "" ,
+          domicilio:pFormulario.value["CiudadOrigen"]+"/" + pFormulario.value["CiudadDestino"],
+          empresa:data["empresa"] ,
+         }]
+      };
+  //}
+  this.mostrarSetPantalla(referencias);
+}
+    
 }
 
 
@@ -570,6 +576,7 @@ public abrirAltaInterconeccion(setData:Interconeccion)
     let config = new MatDialogConfig();
     config.data=setData;
     config.backdropClass='dialog-load';
+    config.data.tipo = this.tipo;
     const dlgn = this.cargaLenta.open(DialogAltaInterconeccionComponent,config );
     return dlgn;
 }

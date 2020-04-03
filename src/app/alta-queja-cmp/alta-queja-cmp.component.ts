@@ -228,7 +228,7 @@ console.log (this.generarCadenaFallas());
                       +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
                       +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
                       +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
-                      +"<DescripcionDetalladaDeFalla>"+ this.DescripFalla.value +"</DescripcionDetalladaDeFalla>"
+                      +"<DescripcionDetalladaDeFalla>"+(this.Observaciones.value == null?'':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
                       +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
                       +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
@@ -251,6 +251,8 @@ console.log (this.generarCadenaFallas());
                       +"<TDD-10D></TDD-10D>"
                       +"<PortID></PortID>"
                       +"<CIC></CIC>"
+                      +"<CentralOrigenOCPIP></CentralOrigenOCPIP>"
+                      +"<CentralDestinoDCPIP></CentralDestinoDCPIP>"
                   +"</DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<FallaMasiva></FallaMasiva>"
                       +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
@@ -285,6 +287,7 @@ console.log (this.generarCadenaFallas());
   get TipoElemento (){return this.FormularioAlta.get('TipoElemento');}
   get GeoLongitud (){return this.FormularioAlta.get('GeoLongitud');}
   get IdElemento (){return this.FormularioAlta.get('IdElemento');}
+  get Observaciones (){return this.FormularioAlta.get('Observaciones');}
 
   private getIDCorre()
   {

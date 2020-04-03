@@ -49,7 +49,7 @@ export class ConsultaQuejaComponent {
 *
 *   @Author:		RuloRamBel
 *   @Date:		    11/11/2019
-*   @update:      26/03/2020
+*   @update:      27/03/2020
 *   @Version:      1.0
 *   @Funcion       consultaQueja
 *  	@param:		      
