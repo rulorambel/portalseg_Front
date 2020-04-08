@@ -222,7 +222,7 @@ console.log (this.generarCadenaFallas());
                       +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
                       +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
                       +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
-                      +"<DescripcionDetalladaDeFalla>"+(this.Observaciones.value == null?'':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
+                      +"<DescripcionDetalladaDeFalla>"+((this.Observaciones.value == null || this.Observaciones.value == '')?'SOLICITUD A REGISTRAR':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
                       +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
                       +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
@@ -270,11 +270,6 @@ console.log (this.generarCadenaFallas());
   get HrAccesoFin  (){return this.FormularioAlta.get('HrAccesoFin');}
   get FolioCliente (){return this.FormularioAlta.get('FolioCliente');}
   get Caracteristica (){return this.FormularioAlta.get('Caracteristica');}
-  get IpOrigen  (){return this.FormularioAlta.get('IpOrigen');}
-  get IpDestino (){return this.FormularioAlta.get('IpDestino');}
-  get CentralOrigen (){return this.FormularioAlta.get('CentralOrigen');}
-  get CentralDestino (){return this.FormularioAlta.get('CentralDestino');}
-  get CIC (){return this.FormularioAlta.get('CIC');}
   get Observaciones (){return this.FormularioAlta.get('Observaciones');}
 
   

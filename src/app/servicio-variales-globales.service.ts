@@ -26,10 +26,10 @@ export class ServicioVarialesGlobalesService {
   private Celular  :string;
   private Origen  :string;
   private Destino  :string;
-  private centralOrigen  :string;
-  private centralDestino :string;
-  private ipOrigen :string;
-  private ipDestino :string;
+  private CentralOrigen  :string;
+  private CentralDestino :string;
+  private IpOrigen :string;
+  private IpDestino :string;
   private IDO :string;
   private IDD :string;
   private Digitos :string;
@@ -41,6 +41,11 @@ export class ServicioVarialesGlobalesService {
   private IdElemento :string
   private TipoElemento :string
   private BndAlta: boolean;
+  private BndAltaIncidente: boolean;
+  private OperadorOrigen: string;
+  private OperadorDestino: string;
+  private CiudadOrigen: string;
+  private CiudadDestino: string;
 
   
   constructor( private snack : MatSnackBar ) { }
@@ -220,40 +225,40 @@ public getDestino()
   return typeof this.Destino == 'undefined' ? '' : this.Destino;
 }
 
-public setcentralOrigen(pcentralOrigen:string)
+public setCentralOrigen(pCentralOrigen:string)
 {
-  this.centralOrigen = pcentralOrigen;
+  this.CentralOrigen = pCentralOrigen;
 }
-public getcentralOrigen()
+public getCentralOrigen()
 {
-  return typeof this.centralOrigen == 'undefined' ? '' : this.centralOrigen;
-}
-
-public setcentralDestino(pcentralDestino:string)
-{
-  this.centralDestino = pcentralDestino;
-}
-public getcentralDestino()
-{
-  return typeof this.centralDestino == 'undefined' ? '' : this.centralDestino;
+  return typeof this.CentralOrigen == 'undefined' ? '' : this.CentralOrigen;
 }
 
-public setipOrigen(pipOrigen:string)
+public setCentralDestino(pCentralDestino:string)
 {
-  this.ipOrigen = pipOrigen;
+  this.CentralDestino = pCentralDestino;
 }
-public getipOrigen()
+public getCentralDestino()
 {
-  return typeof this.ipOrigen == 'undefined' ? '' : this.ipOrigen;
+  return typeof this.CentralDestino == 'undefined' ? '' : this.CentralDestino;
 }
 
-public setipDestino(pipDestino:string)
+public setIpOrigen(pIpOrigen:string)
 {
-  this.ipDestino = pipDestino;
+  this.IpOrigen = pIpOrigen;
 }
-public getipDestino()
+public getIpOrigen()
 {
-  return typeof this.ipDestino == 'undefined' ? '' : this.ipDestino;
+  return typeof this.IpOrigen == 'undefined' ? '' : this.IpOrigen;
+}
+
+public setIpDestino(pIpDestino:string)
+{
+  this.IpDestino = pIpDestino;
+}
+public getIpDestino()
+{
+  return typeof this.IpDestino == 'undefined' ? '' : this.IpDestino;
 }
 
 public setIDO(pIDO:string)
@@ -293,6 +298,41 @@ public getPortID()
   return typeof this.PortID == 'undefined' ? '' : this.PortID;
 }
 
+public setOperadorOrigen(pOperadorOrigen:string)
+{
+  this.OperadorOrigen = pOperadorOrigen;
+}
+public getOperadorOrigen()
+{
+  return typeof this.OperadorOrigen == 'undefined' ? '' : this.OperadorOrigen;
+}
+
+public setOperadorDestino(pOperadorDestino:string)
+{
+  this.OperadorDestino = pOperadorDestino;
+}
+public getOperadorDestino()
+{
+  return typeof this.OperadorDestino == 'undefined' ? '' : this.OperadorDestino;
+}
+
+public setCiudadOrigen(pCiudadOrigen:string)
+{
+  this.CiudadOrigen = pCiudadOrigen;
+}
+public getCiudadOrigen()
+{
+  return typeof this.CiudadOrigen == 'undefined' ? '' : this.CiudadOrigen;
+}
+
+public setCiudadDestino(pCiudadDestino:string)
+{
+  this.CiudadDestino = pCiudadDestino;
+}
+public getCiudadDestino()
+{
+  return typeof this.CiudadDestino == 'undefined' ? '' : this.CiudadDestino;
+}
 
 public setCIC(pCIC:string)
 {
@@ -349,7 +389,7 @@ public setGeoLongitud(pGeoLongitud:string)
 }
 public getGeoLongitud()
 {
-  return typeof this.GeoLatitud == 'undefined' ? '' : this.GeoLatitud;
+  return typeof this.GeoLongitud == 'undefined' ? '' : this.GeoLongitud;
 }
 
 public setIdElemento(pIdElemento:string)
@@ -391,6 +431,15 @@ public numberOnly(event): boolean {
   }
   return true;
 
+}
+
+
+public setBndAltaIncidente(pAlta:boolean) {
+  this.BndAltaIncidente = pAlta;
+}
+
+public getBndAltaIncidente(){
+  return this.BndAltaIncidente;
 }
 }
 

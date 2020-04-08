@@ -90,11 +90,11 @@
 				</tr>
 
                 <td>
-                     <mat-label>Port ID</mat-label>
+                     <mat-label>Port ID </mat-label>
                 </td>
 					<td colspan="1">
 						<mat-form-field class="example-full-width" style="width: 150%;">
-							<input matInput #txtPortID (keypress)="variables.numberOnly($event)" size="23" minlength="21" maxlength="23"  formControlName="PortID" required>          
+							<input matInput #txtPortID (keypress)="variables.numberOnly($event)" size="23" minlength="21" maxlength="23"  formControlName="PortID" [required]="Tipo.value == 'PNT'">          
 						</mat-form-field>
 						<div *ngIf="PortID.invalid" class="validadorerror"><span>Port ID es <strong>Requerido</strong></span></div>
 				</td>

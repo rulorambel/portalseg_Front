@@ -85,6 +85,7 @@ CaracteristicaDet:any;
         this.disabled_btnCreaQueja="false";
         return;
       }
+      console.log(this.FormularioAlta);
       if (this.FormularioAlta.status =="INVALID")
       {
          this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
@@ -92,19 +93,21 @@ CaracteristicaDet:any;
          return;
       }
       if(!this.variables.getBndAlta()) {
-        this.variables.setcentralOrigen(this.CentralOrigen.value);
-        this.variables.setcentralDestino(this.CentralDestino.value);
-        this.variables.setipOrigen(this.IpOrigen.value);
-        this.variables.setipDestino(this.IpDestino.value);
+        this.variables.setCentralOrigen(this.CentralOrigen.value);
+        this.variables.setCentralDestino(this.CentralDestino.value);
+        this.variables.setIpOrigen(this.IpOrigen.value);
+        this.variables.setIpDestino(this.IpDestino.value);
         this.variables.setOrigen (this.Origen.value);
         this.variables.setDestino (this.Destino.value);
-        this.variables.setipOrigen (this.IpOrigen.value);
-        this.variables.setipDestino (this.IpDestino.value);
         this.variables.setIDO (this.IDO.value);
         this.variables.setIDD (this.IDD.value);
         this.variables.setDigitos (this.Digitos.value);
         this.variables.setPortID (this.PortID.value);
         this.variables.setCIC (this.CIC.value);
+        this.variables.setOperadorOrigen (this.OperadorOrigen.value);
+        this.variables.setOperadorDestino (this.OperadorDestino.value);
+        this.variables.setCiudadOrigen (this.CiudadOrigen.value);
+        this.variables.setCiudadDestino (this.CiudadDestino.value);
         this.variables.setBndAlta(true);
       }
       this.enviaQueja();
@@ -139,21 +142,21 @@ CaracteristicaDet:any;
       Observaciones   : new FormControl('' ),
       Caracteristica  : new FormControl('' ),
       FolioCliente    : new FormControl('', [Validators.required]),
-      Origen          : new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(20),Validators.pattern('[0-9]+')]),
-      Destino         : new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(20),Validators.pattern('[0-9]+')]),
-      IpOrigen        : new FormControl('', [Validators.required,Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
-      IpDestino       : new FormControl('', [Validators.required,Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
-      IDO             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
-      IDD             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
-      Digitos         : new FormControl('', [Validators.required,Validators.minLength(10),Validators.pattern('[0-9]{10}')]),
-      PortID          : new FormControl('', [Validators.required,Validators.minLength(21),Validators.maxLength(23),Validators.pattern('[0-9]+')]),
-      CIC             : new FormControl('',),
-      CentralOrigen   : new FormControl('',),
-      CentralDestino  : new FormControl('',),
-      CiudadOrigen    : new FormControl('',),
-      OperadorOrigen  : new FormControl('',),
-      OperadorDestino : new FormControl('',),
-      CiudadDestino   : new FormControl('',)
+      Origen          : new FormControl('', ),
+      Destino         : new FormControl('', ),
+      IpOrigen        : new FormControl('', [Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
+      IpDestino       : new FormControl('', [Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
+      IDO             : new FormControl('', ),
+      IDD             : new FormControl('', ),
+      Digitos         : new FormControl('', ),
+      PortID          : new FormControl('', ),
+      CIC             : new FormControl('', ),
+      CentralOrigen   : new FormControl('', ),
+      CentralDestino  : new FormControl('', ),
+      CiudadOrigen    : new FormControl('', ),
+      OperadorOrigen  : new FormControl('', ),
+      OperadorDestino : new FormControl('', ),
+      CiudadDestino   : new FormControl('', )
 
       });
   }
@@ -197,6 +200,7 @@ private enviaQueja()
       data["descripcionDelError"] = "Se ha Creado el Incidente :"+ data["identificadorDeQueja"] ;
 
       this.openDialog(data) ;
+      this.limpiarPantallaAlta();
        }
     else
      {
@@ -206,7 +210,7 @@ private enviaQueja()
       this.variables.muestraBarra(strerror.substr(0,strerror.indexOf(".")),"ERROR" );
 
     }
-    this.limpiarPantallaAlta();
+    //this.limpiarPantallaAlta();
   });
  
 }
@@ -254,7 +258,7 @@ console.log (this.generarCadenaFallas());
                       +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
                       +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
                       +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
-                      +"<DescripcionDetalladaDeFalla>"+(this.Observaciones.value == null?'':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
+                      +"<DescripcionDetalladaDeFalla>"+((this.Observaciones.value == null || this.Observaciones.value == '')?'SOLICITUD A REGISTRAR':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
                       +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
                       +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
@@ -270,15 +274,15 @@ console.log (this.generarCadenaFallas());
                       +"<Destino1>"+this.variables.getDestino()+"</Destino1>"
                       +"<Origen2></Origen2>"
                       +"<Destino2></Destino2>"
-                      +"<IPOrigen>"+this.variables.getipOrigen()+"</IPOrigen>"
-                      +"<IPDestino>"+this.variables.getipDestino()+"</IPDestino>"
+                      +"<IPOrigen>"+this.variables.getIpOrigen()+"</IPOrigen>"
+                      +"<IPDestino>"+this.variables.getIpDestino()+"</IPDestino>"
                       +"<TDD-IDO>"+this.variables.getIDO()+"</TDD-IDO>"
                       +"<TDD-IDD>"+this.variables.getIDD()+"</TDD-IDD>"
                       +"<TDD-10D>"+this.variables.getDigitos()+"</TDD-10D>"
                       +"<PortID>"+this.variables.getPortID()+"</PortID>"
                       +"<CIC>"+this.CIC.value+"</CIC>"
-                      +"<CentralOrigenOCPIP>"+this.variables.getcentralOrigen+"</CentralOrigenOCPIP>"
-                      +"<CentralDestinoDCPIP>"+this.variables.getcentralDestino()+"</CentralDestinoDCPIP>"
+                      +"<CentralOrigenOCPIP>"+this.variables.getCentralOrigen()+"</CentralOrigenOCPIP>"
+                      +"<CentralDestinoDCPIP>"+this.variables.getCentralDestino()+"</CentralDestinoDCPIP>"
                   +"</DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<FallaMasiva></FallaMasiva>"
                       +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
@@ -318,8 +322,6 @@ console.log (this.generarCadenaFallas());
   get OperadorDestino (){return this.FormularioAlta.get('OperadorDestino');}
   get Observaciones (){return this.FormularioAlta.get('Observaciones');}
   
-
-
 
   private getIDCorre()
   {
@@ -373,7 +375,6 @@ console.log (this.generarCadenaFallas());
     const dlg = this.dialogRef.open(DialogInformComponent,config );
     
     }
-
   /**************************************************************************************  
 *  Abre el dialogo de la imagen de Carga lenta
 *

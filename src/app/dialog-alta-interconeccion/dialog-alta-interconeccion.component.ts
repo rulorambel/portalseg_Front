@@ -14,7 +14,6 @@ import { Interconeccion } from '../bean/bean-interconeccion';
   styleUrls: ['./dialog-alta-interconeccion.component.css']
 })
 export class DialogAltaInterconeccionComponent implements OnInit {
-  
   FormularioAlta:FormGroup;
   disabled_btnCreaQueja:string="false";
   dataInterconeccion : Interconeccion;
@@ -47,7 +46,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
         IDO             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
         IDD             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
         Digitos         : new FormControl('', [Validators.required,Validators.minLength(10),Validators.pattern('[0-9]{10}')]),
-        PortID          : new FormControl('', [Validators.required,Validators.minLength(21),Validators.maxLength(23),Validators.pattern('[0-9]+')]),
+        PortID          : new FormControl('', [Validators.minLength(21),Validators.maxLength(23),Validators.pattern('[0-9]+')]),
         Tipo            : new FormControl('',),
         CentralOrigen   : new FormControl('',),
         CentralDestino  : new FormControl('',),
@@ -76,15 +75,19 @@ export class DialogAltaInterconeccionComponent implements OnInit {
 
       this.variables.setOrigen (this.Origen.value);
       this.variables.setDestino (this.Destino.value);
-      this.variables.setipOrigen (this.IpOrigen.value);
-      this.variables.setipDestino (this.IpDestino.value);
+      this.variables.setIpOrigen (this.IpOrigen.value);
+      this.variables.setIpDestino (this.IpDestino.value);
       this.variables.setIDO (this.IDO.value);
       this.variables.setIDD (this.IDD.value);
       this.variables.setDigitos (this.Digitos.value);
       this.variables.setPortID (this.PortID.value);
       this.variables.setCIC ('');
-      this.variables.setcentralOrigen (this.CiudadOrigen.value);
-      this.variables.setcentralDestino (this.CentralDestino.value);
+      this.variables.setCentralOrigen (this.CentralOrigen.value);
+      this.variables.setCentralDestino (this.CentralDestino.value);
+      this.variables.setOperadorOrigen (this.OperadorOrigen.value);
+      this.variables.setOperadorDestino (this.OperadorDestino.value);
+      this.variables.setCiudadOrigen (this.CiudadOrigen.value);
+      this.variables.setCiudadDestino (this.CiudadDestino.value);
       this.variables.setBndAlta(true);
 
       this.dialogLoad.close(this.FormularioAlta);

@@ -95,6 +95,7 @@ public ejecutaBusqueda(strFolio)
   
   { 
     this.valoresPreBusqueda();
+    this.variables.setBndAltaIncidente(false);
     if (strFolio === "" || strFolio===undefined || strFolio ===null )
       {
         this.variables.muestraBarra("Necesitamos una Referencia para iniciar la busqueda","MSG");
@@ -130,6 +131,7 @@ public ejecutaBusqueda(strFolio)
       }
 
       this.valoresPostBusqueda();
+      
   }
 
 
@@ -431,7 +433,7 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
                               this.variables.setCUC(obj["CUCEmpresarial"]);
                               this.variables.setReferenciaSelecionada(obj["referencia"]);
                               this.variables.setEmpresasSelecionadas(arrEmpresas);
-                              
+                              this.variables.setBndAltaIncidente(true);
                               this.cambiaAlta.emit();
                             }});
 }
@@ -453,6 +455,7 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
 public limpiaPantalla (obj)
 {
   this.limpiaReferencia(obj)
+  this.variables.setBndAltaIncidente(false);
   this.dataSource=null;
 }
 
@@ -626,7 +629,7 @@ public consultaComparticion(referencias:string)
     if(referencias.startsWith("NIS-") && referencias.length == 17) {
       this.variables.setIdNis(referencias);
       console.log (this.variables.getTipoServicio());
-      this.consultaServiciosCMP(referencias);
+      //this.consultaServiciosCMP(referencias);
       let dlg = this.abreDialogoAltaComparticion(); 
       dlg.afterClosed().subscribe(Respuesta=> { this.llenaSetReferenciaCMP(Respuesta)} );
     } else {

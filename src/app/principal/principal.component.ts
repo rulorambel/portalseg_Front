@@ -29,6 +29,7 @@ export class PrincipalComponent {
   esvisibleAltaAUX :boolean=false;
 
 
+
   constructor(private rutaActiva: ActivatedRoute ,
               private serviciohttp: ServicioHttpService,
               private variables :ServicioVarialesGlobalesService,
@@ -42,6 +43,7 @@ export class PrincipalComponent {
     this.variables.setCorreo(this.rutaActiva.snapshot.params.correo);
     this.variables.setTelefono(this.rutaActiva.snapshot.params.telefono);
     this.variables.setCelular(this.rutaActiva.snapshot.params.celular);
+    this.variables.setBndAltaIncidente(false);
 
 
     const TipoServicio : string = this.rutaActiva.snapshot.params.tserv;
@@ -94,6 +96,7 @@ export class PrincipalComponent {
   limpiarComponentes(event)
   {
    this.alta.limpiarPantallaAlta();
+   this.variables.setBndAltaIncidente(false);
   }
 
 
