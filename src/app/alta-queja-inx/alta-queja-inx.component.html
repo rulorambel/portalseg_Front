@@ -23,7 +23,7 @@
             </tr>
             <table  style="width: 100%;" >
             <tr>
-                <td> <mat-label>IP Origen/OPC {{ variables.getBndAlta() }}</mat-label></td>
+                <td> <mat-label>IP Origen/OPC </mat-label></td>
                 <td>
                     <mat-form-field class="example-full-width" style="width: 95%;">
                         <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()" [required]="!variables.getBndAlta()">           
@@ -60,6 +60,145 @@
                     </mat-form-field>
                 </td>
             </tr>
+            </table>
+            <tr>
+                <td>
+                    <div class="divcabecera">Datos de Servicio de Interconexión PNT-TNT</div>
+                </td>
+            </tr>
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+                        <mat-label>Origen</mat-label>
+                    </td>
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">
+                            <input matInput #txtOrigen readonly formControlName="Origen" [value]="variables.getOrigen()">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-label>Destino</mat-label>
+                    </td>
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">
+                            <input matInput #txtDestino  readonly formControlName="Destino" [value]="variables.getDestino()">
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                            <mat-label>IP Origen/OPC</mat-label>
+                    </td>
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">
+                            <input matInput #txtIpOrigen readonly formControlName="IpOrigen" [value]="variables.getIpOrigen()">           
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-label>IP Destino/OPC</mat-label>
+                    </td>
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">  
+                            <input matInput #txtIpDestino readonly  formControlName="IpDestino" [value]="variables.getIpDestino()">           
+                        </mat-form-field>
+                    </td>
+                    </tr>
+                <tr>
+                    <td colspan="1">
+                        <mat-label>TDD</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>IDO*</mat-label>
+                            <input matInput #txtIDO readonly formControlName="IDO" [value]="variables.getIDO()">
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>IDD*</mat-label>
+                            <input matInput #txtIDD readonly formControlName="IDD" [value]="variables.getIDD()">
+                        </mat-form-field>
+                        <div *ngIf="IDD.invalid" class="validadorerror"><span>IDD es <strong>Requerido</strong></span></div>
+                    </td>
+
+                    <td>
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>10 Dígitos*</mat-label>
+                            <input matInput #txtDigitos readonly formControlName="Digitos" [value]="variables.getDigitos()">
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <td>
+                    <mat-label>Port ID</mat-label>
+                </td>
+                <td colspan="1">
+                    <mat-form-field class="example-full-width" style="width: 150%;">
+                        <input matInput #txtPortID readonly formControlName="PortID" [value]="variables.getPortID()">
+                    </mat-form-field>
+                </td>
+
+                <tr>
+                    <td>
+                        <mat-label>Operador Origen (IDO)</mat-label>
+                    </td>
+
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">
+                            <input matInput #OperadorOrigen readonly formControlName="OperadorOrigen" [value]="variables.getOperadorOrigen()" >
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <mat-label>Operador Destino (IDD)</mat-label>
+                    </td>
+                    <td colspan="1">
+                        <mat-form-field class="example-full-width" style="width: 95%;">
+                            <input matInput #OperadorDestino readonly formControlName="OperadorDestino" [value]="variables.getOperadorDestino()">
+                        </mat-form-field>
+                    </td>
+
+                    <tr>
+                        <td>
+                            <mat-label>Ciudad Origen (NIR)</mat-label>
+                        </td>
+                        <td colspan="1">
+                            <mat-form-field class="example-full-width" style="width: 95%;">
+                                <input matInput #CiudadOrigen readonly formControlName="CiudadOrigen" [value]="variables.getCiudadOrigen()">
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-label>Ciudad Destino (NIR)</mat-label>
+                        </td>
+
+                        <td colspan="1">
+                            <mat-form-field class="example-full-width" style="width: 95%;">
+                                <input matInput #CiudadDestino readonly formControlName="CiudadDestino" [value]="variables.getCiudadDestino()">
+                            </mat-form-field>
+                        </td>
+
+                        <tr>
+                            <td>
+                                <mat-label>Central Origen (OPC/IP)</mat-label>
+                            </td>
+
+                            <td colspan="1">
+                                <mat-form-field class="example-full-width" style="width: 95%;">
+                                    <input matInput #CentralOrigen readonly formControlName="CentralOrigen" [value]="variables.getCentralOrigen()">
+                                </mat-form-field>
+                            </td>
+
+                            <td>
+                                <mat-label>Central Destino (DPC/IP)</mat-label>
+                            </td>
+
+                            <td colspan="1">
+                                <mat-form-field class="example-full-width" style="width: 95%;">
+                                    <input matInput #CentralDestino readonly formControlName="CentralDestino" [value]="variables.getCentralDestino()">
+                                </mat-form-field>
+                            </td>
             </table>
             <tr>
                 <td>
@@ -209,13 +348,13 @@
                         </div>
                             </td>
                             <td>
-                                    <mat-label>Observaciones</mat-label>
-                            </td>
-                            <td colspan="3">
-                                    <mat-form-field class="example-full-width" style="width: 95%;">
-                                            <textarea  matInput > </textarea>        
-                                    </mat-form-field>
-                            </td>
+                                <mat-label>Observaciones</mat-label>
+                        </td>
+                        <td colspan="3">
+                                <mat-form-field class="example-full-width" style="width: 95%;">
+                                    <input matInput  formControlName="Observaciones"  >        
+                                </mat-form-field>
+                        </td>
                         </tr>
                  </table>
             </tr>		                

@@ -14,7 +14,6 @@ import { Interconeccion } from '../bean/bean-interconeccion';
   styleUrls: ['./dialog-alta-interconeccion.component.css']
 })
 export class DialogAltaInterconeccionComponent implements OnInit {
-  
   FormularioAlta:FormGroup;
   disabled_btnCreaQueja:string="false";
   dataInterconeccion : Interconeccion;
@@ -28,7 +27,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
     this.FormularioAlta= this.createFormGroup();
     this.dataInterconeccion = data;
 
-    this.Tipo.setValue ("PNT");
+    this.Tipo.setValue (data.tipo);
 
   }
 
@@ -40,16 +39,15 @@ export class DialogAltaInterconeccionComponent implements OnInit {
     
     return new FormGroup({
      
-        Origen          : new FormControl('', [Validators.required]),
-        Destino         : new FormControl('', [Validators.required]),
-        IpOrigen        : new FormControl('', [Validators.required]),
-        IpDestino       : new FormControl('', [Validators.required]),
-        IDO             : new FormControl('', [Validators.required]),
-        IDD             : new FormControl('', [Validators.required]),
+        Origen          : new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(20),Validators.pattern('[0-9]+')]),
+        Destino         : new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(20),Validators.pattern('[0-9]+')]),
+        IpOrigen        : new FormControl('', [Validators.required,Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
+        IpDestino       : new FormControl('', [Validators.required,Validators.pattern(/^([0-9]{4}|[0-9]{5}|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4})\b/gm)]),
+        IDO             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
+        IDD             : new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('[0-9]{3}')]),
         Digitos         : new FormControl('', [Validators.required,Validators.minLength(10),Validators.pattern('[0-9]{10}')]),
-        PortID          : new FormControl('', [Validators.required]),
+        PortID          : new FormControl('', [Validators.minLength(21),Validators.maxLength(23),Validators.pattern('[0-9]+')]),
         Tipo            : new FormControl('',),
-        CIC             : new FormControl('',),
         CentralOrigen   : new FormControl('',),
         CentralDestino  : new FormControl('',),
         CiudadOrigen    : new FormControl('',),
@@ -61,6 +59,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
 
   public cerrarDialog()
   {
+    this.variables.setBndAlta(false);
     this.dialogLoad.close();
   }
   public enviaAlta()
@@ -76,13 +75,19 @@ export class DialogAltaInterconeccionComponent implements OnInit {
 
       this.variables.setOrigen (this.Origen.value);
       this.variables.setDestino (this.Destino.value);
-      this.variables.setipOrigen (this.IpOrigen.value);
-      this.variables.setipDestino (this.IpDestino.value);
+      this.variables.setIpOrigen (this.IpOrigen.value);
+      this.variables.setIpDestino (this.IpDestino.value);
       this.variables.setIDO (this.IDO.value);
       this.variables.setIDD (this.IDD.value);
       this.variables.setDigitos (this.Digitos.value);
       this.variables.setPortID (this.PortID.value);
-      this.variables.setCIC (this.CIC.value);
+      this.variables.setCIC ('');
+      this.variables.setCentralOrigen (this.CentralOrigen.value);
+      this.variables.setCentralDestino (this.CentralDestino.value);
+      this.variables.setOperadorOrigen (this.OperadorOrigen.value);
+      this.variables.setOperadorDestino (this.OperadorDestino.value);
+      this.variables.setCiudadOrigen (this.CiudadOrigen.value);
+      this.variables.setCiudadDestino (this.CiudadDestino.value);
       this.variables.setBndAlta(true);
 
       this.dialogLoad.close(this.FormularioAlta);
@@ -229,8 +234,6 @@ if (intLada == 55 || intLada == 33 || intLada == 56 ||intLada == 81)
   }
       );
 }
-
-
 
 
 /**************************************************************************************  

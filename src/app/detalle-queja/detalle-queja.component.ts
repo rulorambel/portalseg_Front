@@ -106,7 +106,7 @@ export class DetalleQuejaComponent  {
 *
 *   @Author:		RuloRamBel
 *   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*   @update:      27/03/2020  
 *   @Version:      1.0
 *   @Funcion       actualizarQueja
 *  	@param:		    .
@@ -120,9 +120,13 @@ public actualizarQueja()
    {
     this.visibleLoad=true;
     this.disabled_btnServicioOK="true";
-    let parametro:string = "incident.id = \""+this.lblQueja +"\"";
+    let parametro:string = "\""+ this.lblQueja.replace(/,/g,"\",\"") +"\""; 
     let parametros = new HttpParams()
-     .set("querry",parametro);
+     .set("querry",parametro)
+     .set("siglas", "\""+ this.variables.getTipoServicio() +"\"")
+     .set("cuc", this.variables.getCUC())
+     .set("callback", "\"SIPO\",\"SEG\"")
+     .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
  
     this.servhttp.consultaQueja(parametros)
      .subscribe(data=>{
@@ -130,7 +134,7 @@ public actualizarQueja()
                   {
                     console.log (data);
                    // this.variables.getQuejaSeleccionada();
-                    this.variables.setQuejaSeleccionada( data[0]);                   
+                    this.variables.setQuejaSeleccionada( data['data'][0]);                   
                     this.lblQueja = data['data'][0]["IDqueja"];
                     this.problema = data['data'][0]["problemaReportado"];
                     this.FolioConsecionario= data['data'][0]["folioConcesionario"];

@@ -11,7 +11,7 @@
 * en la lista de Servicios o de las que el usuario quiera consultar
 *
 **************************************************************************************/
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild, ɵConsole } from '@angular/core';
 import { Queja } from '../bean/bean-queja';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
@@ -49,7 +49,7 @@ export class ConsultaQuejaComponent {
 *
 *   @Author:		RuloRamBel
 *   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*   @update:      27/03/2020
 *   @Version:      1.0
 *   @Funcion       consultaQueja
 *  	@param:		      
@@ -74,7 +74,7 @@ consultaQueja(queja)
    .set("querry",parametro)
    .set("siglas", "\""+ this.variables.getTipoServicio() +"\"")
    .set("cuc", this.variables.getCUC())
-   .set("referencia", "\"SIPO\",\"SEG\"")
+   .set("callback", "\"SIPO\",\"SEG\"")
    .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
         
  
@@ -213,6 +213,8 @@ limpiaQueja(queja)
   
   selecionDato(dato)
   {
+    console.log(dato);
+    
     this.variables.setQuejaSeleccionada(dato);
    this.esvisibleDetalle=true;
    this.detallequeja.muestraDetalle();

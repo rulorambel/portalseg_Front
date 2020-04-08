@@ -26,10 +26,10 @@ export class ServicioVarialesGlobalesService {
   private Celular  :string;
   private Origen  :string;
   private Destino  :string;
-  private Origen2  :string;
-  private Destino2  :string;
-  private ipOrigen :string;
-  private ipDestino :string;
+  private CentralOrigen  :string;
+  private CentralDestino :string;
+  private IpOrigen :string;
+  private IpDestino :string;
   private IDO :string;
   private IDD :string;
   private Digitos :string;
@@ -41,8 +41,13 @@ export class ServicioVarialesGlobalesService {
   private IdElemento :string
   private TipoElemento :string
   private BndAlta: boolean;
+  private BndAltaIncidente: boolean;
+  private OperadorOrigen: string;
+  private OperadorDestino: string;
+  private CiudadOrigen: string;
+  private CiudadDestino: string;
 
-
+  
   constructor( private snack : MatSnackBar ) { }
 
   public setEmpresasSelecionadas(data : Empresa[] )
@@ -220,40 +225,40 @@ public getDestino()
   return typeof this.Destino == 'undefined' ? '' : this.Destino;
 }
 
-public setOrigen2(pOrigen:string)
+public setCentralOrigen(pCentralOrigen:string)
 {
-  this.Origen2 = pOrigen;
+  this.CentralOrigen = pCentralOrigen;
 }
-public getOrigen2()
+public getCentralOrigen()
 {
-  return typeof this.Origen2 == 'undefined' ? '' : this.Origen2;
-}
-
-public setDestino2(pDestino:string)
-{
-  this.Destino2 = pDestino;
-}
-public getDestino2()
-{
-  return typeof this.Destino2 == 'undefined' ? '' : this.Destino2;
+  return typeof this.CentralOrigen == 'undefined' ? '' : this.CentralOrigen;
 }
 
-public setipOrigen(pipOrigen:string)
+public setCentralDestino(pCentralDestino:string)
 {
-  this.ipOrigen = pipOrigen;
+  this.CentralDestino = pCentralDestino;
 }
-public getipOrigen()
+public getCentralDestino()
 {
-  return typeof this.ipOrigen == 'undefined' ? '' : this.ipOrigen;
+  return typeof this.CentralDestino == 'undefined' ? '' : this.CentralDestino;
 }
 
-public setipDestino(pipDestino:string)
+public setIpOrigen(pIpOrigen:string)
 {
-  this.ipDestino = pipDestino;
+  this.IpOrigen = pIpOrigen;
 }
-public getipDestino()
+public getIpOrigen()
 {
-  return typeof this.ipDestino == 'undefined' ? '' : this.ipDestino;
+  return typeof this.IpOrigen == 'undefined' ? '' : this.IpOrigen;
+}
+
+public setIpDestino(pIpDestino:string)
+{
+  this.IpDestino = pIpDestino;
+}
+public getIpDestino()
+{
+  return typeof this.IpDestino == 'undefined' ? '' : this.IpDestino;
 }
 
 public setIDO(pIDO:string)
@@ -293,6 +298,41 @@ public getPortID()
   return typeof this.PortID == 'undefined' ? '' : this.PortID;
 }
 
+public setOperadorOrigen(pOperadorOrigen:string)
+{
+  this.OperadorOrigen = pOperadorOrigen;
+}
+public getOperadorOrigen()
+{
+  return typeof this.OperadorOrigen == 'undefined' ? '' : this.OperadorOrigen;
+}
+
+public setOperadorDestino(pOperadorDestino:string)
+{
+  this.OperadorDestino = pOperadorDestino;
+}
+public getOperadorDestino()
+{
+  return typeof this.OperadorDestino == 'undefined' ? '' : this.OperadorDestino;
+}
+
+public setCiudadOrigen(pCiudadOrigen:string)
+{
+  this.CiudadOrigen = pCiudadOrigen;
+}
+public getCiudadOrigen()
+{
+  return typeof this.CiudadOrigen == 'undefined' ? '' : this.CiudadOrigen;
+}
+
+public setCiudadDestino(pCiudadDestino:string)
+{
+  this.CiudadDestino = pCiudadDestino;
+}
+public getCiudadDestino()
+{
+  return typeof this.CiudadDestino == 'undefined' ? '' : this.CiudadDestino;
+}
 
 public setCIC(pCIC:string)
 {
@@ -349,7 +389,7 @@ public setGeoLongitud(pGeoLongitud:string)
 }
 public getGeoLongitud()
 {
-  return typeof this.GeoLatitud == 'undefined' ? '' : this.GeoLatitud;
+  return typeof this.GeoLongitud == 'undefined' ? '' : this.GeoLongitud;
 }
 
 public setIdElemento(pIdElemento:string)
@@ -368,5 +408,38 @@ public getIdElemento ()
   public getBndAlta(){
     return this.BndAlta;
   }
+
+  /**************************************************************************************  
+*   Permite unicamente digitos
+*
+*   @Author:		Anahi Flores
+*   @Date:		  31/03/2020
+*   @update:    31/03/2020 
+*   @Version:   1.0
+*   @Funcion    numberOnly
+*  	@param:		  
+*-------------------------------------------------------------------------------------
+*   @return:     
+*
+**************************************************************************************/
+
+public numberOnly(event): boolean {
+  const charCode = (event.which) ? event.which : event.keyCode;
+  console.log(charCode);
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
+
+}
+
+
+public setBndAltaIncidente(pAlta:boolean) {
+  this.BndAltaIncidente = pAlta;
+}
+
+public getBndAltaIncidente(){
+  return this.BndAltaIncidente;
+}
 }
 
