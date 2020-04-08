@@ -159,7 +159,7 @@ public actualizarQueja()
                     this.consultaBitacora();
                   }
                   else{
-                    this.variables.muestraBarra("No encontramos información en nuestra lista de quejas","MENSAJE");
+                    this.variables.muestraBarra("No encontramos Información en nuestra Lista de Incidentes","MENSAJE");
                   } });
 }
 

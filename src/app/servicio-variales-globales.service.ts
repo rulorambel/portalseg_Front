@@ -42,10 +42,12 @@ export class ServicioVarialesGlobalesService {
   private TipoElemento :string
   private BndAlta: boolean;
   private BndAltaIncidente: boolean;
+  private BndAltaInx: boolean;
   private OperadorOrigen: string;
   private OperadorDestino: string;
   private CiudadOrigen: string;
   private CiudadDestino: string;
+  private TipoInx: string;
 
   
   constructor( private snack : MatSnackBar ) { }
@@ -288,6 +290,15 @@ public getDigitos()
   return typeof this.Digitos == 'undefined' ? '' : this.Digitos;
 }
 
+public setTipoInx(pTipoInx:string)
+{
+  this.TipoInx = pTipoInx;
+}
+public getTipoInx()
+{
+  return typeof this.TipoInx == 'undefined' ? '' : this.TipoInx;
+}
+
 
 public setPortID(pPortID:string)
 {
@@ -440,6 +451,14 @@ public setBndAltaIncidente(pAlta:boolean) {
 
 public getBndAltaIncidente(){
   return this.BndAltaIncidente;
+}
+
+public setBndAltaInx(pAlta:boolean) {
+  this.BndAltaInx = pAlta;
+}
+
+public getBndAltaInx(){
+  return this.BndAltaInx;
 }
 }
 

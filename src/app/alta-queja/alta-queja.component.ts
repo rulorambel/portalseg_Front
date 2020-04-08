@@ -78,13 +78,13 @@ CaracteristicaDet:any;
 
    if (this.interlocutores.FormularioContacto.status =="INVALID")
       {
-        this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
+        this.variables.muestraBarra("Para crear un Incidente es necesario contar con la Información Correcta del Interlocutor","Error");
         this.disabled_btnCreaQueja="false";
         return;
        }
        if (this.FormularioAlta.status =="INVALID")
        {
-         this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
+         this.variables.muestraBarra("Para crear un Incidente es necesario contar con la Información Correcta","Error");
          this.disabled_btnCreaQueja="false";
          return;
         }

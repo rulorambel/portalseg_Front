@@ -89,6 +89,7 @@ export class DialogAltaInterconeccionComponent implements OnInit {
       this.variables.setCiudadOrigen (this.CiudadOrigen.value);
       this.variables.setCiudadDestino (this.CiudadDestino.value);
       this.variables.setBndAlta(true);
+      this.variables.setTipoInx(this.Tipo.value);
 
       this.dialogLoad.close(this.FormularioAlta);
    

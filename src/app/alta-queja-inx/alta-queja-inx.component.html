@@ -16,12 +16,12 @@
             <td>
                 <br />
             </td>
-            <tr>
+            <tr [style.display]="!variables.getBndAltaInx() ? '' : 'none'">
                 <td>
                     <div class="divcabecera">Datos de Servicio de Interconexión</div> 
                  </td>
             </tr>
-            <table  style="width: 100%;" >
+            <table  style="width: 100%;" [style.display]="!variables.getBndAltaInx() ? '' : 'none'">
             <tr>
                 <td> <mat-label>IP Origen/OPC </mat-label></td>
                 <td>
@@ -61,12 +61,12 @@
                 </td>
             </tr>
             </table>
-            <tr>
+            <tr [style.display]="variables.getBndAltaInx() ? '' : 'none'">
                 <td>
-                    <div class="divcabecera">Datos de Servicio de Interconexión PNT-TNT</div>
+                    <div class="divcabecera">Datos de Servicio de Interconexión - {{variables.getTipoInx()}}</div>
                 </td>
             </tr>
-            <table style="width: 100%;">
+            <table style="width: 100%;" [style.display]="variables.getBndAltaInx() ? '' : 'none'">
                 <tr>
                     <td>
                         <mat-label>Origen</mat-label>

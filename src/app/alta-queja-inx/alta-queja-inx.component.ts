@@ -81,14 +81,14 @@ CaracteristicaDet:any;
 
       if (this.interlocutores.FormularioContacto.status =="INVALID")
       {
-        this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
+        this.variables.muestraBarra("Para crear un Incidente es necesario contar con la Información correcta de Contactos en Sitios","Error");
         this.disabled_btnCreaQueja="false";
         return;
       }
       console.log(this.FormularioAlta);
       if (this.FormularioAlta.status =="INVALID")
       {
-         this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
+         this.variables.muestraBarra("Para crear una Incidente es necesario contar con la Información correcta","Error");
          this.disabled_btnCreaQueja="false";
          return;
       }

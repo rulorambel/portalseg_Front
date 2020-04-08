@@ -205,7 +205,7 @@ public consultaServicios(referencias:string)
       this.dataSource.paginator = this.paginator;    
     } else
     {
-      this.variables.muestraBarra("no encontramos datos en nuestra lista de servicios", "ERROR");
+      this.variables.muestraBarra("No encontramos Datos en nuestra Lista de Servicios", "ERROR");
     }
 }
 
@@ -435,7 +435,10 @@ public llenaSetReferencia( pFormulario : any , data : Interconeccion , validacio
                               this.variables.setEmpresasSelecionadas(arrEmpresas);
                               this.variables.setBndAltaIncidente(true);
                               this.cambiaAlta.emit();
+                              this.variables.setBndAltaInx((referencia.startsWith ("TNT") || referencia.startsWith ("PNT")))
+                              
                             }});
+
 }
 
 /**************************************************************************************  
@@ -660,7 +663,7 @@ public consultaServiciosCMP(referencias:string)
                     this.dataSource  =  new MatTableDataSource<Referencia>(data['data'])  ;
                     this.dataSource.paginator = this.paginator;
                   } else{
-                    this.variables.muestraBarra("no encontramos datos en nuestra lista de servicios", "ERROR");
+                    this.variables.muestraBarra("No encontramos Datos en nuestra Lista de Servicios", "ERROR");
                 }
               });     
  }

@@ -81,13 +81,13 @@ crearQueja()
 
  if (this.interlocutores.FormularioContacto.status =="INVALID")
     {
-      this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
+      this.variables.muestraBarra("Para crear un Incidente es necesario contar con la información correcta de Contactos en Sitios","Error");
       this.disabled_btnCreaQueja="false";
       return;
      }
      if (this.FormularioAlta.status =="INVALID")
      {
-       this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
+       this.variables.muestraBarra("Para crear un Incidente es necesario contar con la Información correcta","Error");
        this.disabled_btnCreaQueja="false";
        return;
       }
@@ -95,7 +95,7 @@ crearQueja()
 }
 
  /**************************************************************************************  
-*   Crea el formulario para la alta de la Queja
+*   Crea el formulario para la alta del Inidente
 *
 *   @Author:		RuloRamBel
 *   @Date:		  11/11/2019
