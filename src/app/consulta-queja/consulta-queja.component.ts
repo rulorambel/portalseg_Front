@@ -11,7 +11,7 @@
 * en la lista de Servicios o de las que el usuario quiera consultar
 *
 **************************************************************************************/
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild, ɵConsole } from '@angular/core';
 import { Queja } from '../bean/bean-queja';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
@@ -29,7 +29,7 @@ import {DetalleQuejaComponent} from '../detalle-queja/detalle-queja.component'
 
 
 export class ConsultaQuejaComponent {
-  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha' ];
+  displayedColumns: string[] = ['ID','Estado','Asignado','Fecha', 'callback.type'];
   dataSource: any ;
   Mensaje : string;
   esvisibleDetalle :boolean=false;
@@ -49,7 +49,7 @@ export class ConsultaQuejaComponent {
 *
 *   @Author:		RuloRamBel
 *   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*   @update:      27/03/2020
 *   @Version:      1.0
 *   @Funcion       consultaQueja
 *  	@param:		      
@@ -63,20 +63,28 @@ consultaQueja(queja)
 
   this.limpiaComponente();
   this.visibleLoad=true;
-  let parametro:string = this.armaStrQuerry(queja);
+  
+  let parametro:string = ""; 
 
-
+  if (queja != "")
+  
+  parametro="\""+ queja.replace(/,/g,"\",\"") +"\"";
   
   let parametros = new HttpParams()
-     .set("querry",parametro);
+   .set("querry",parametro)
+   .set("siglas", "\""+ this.variables.getTipoServicio() +"\"")
+   .set("cuc", this.variables.getCUC())
+   .set("callback", "\"SIPO\",\"SEG\"")
+   .set("estado", "\"INICIAL\",\"DIAGNOSTICO\",\"PENDIENTE POR PARO RELOJ\",\"EN PROCESO\",\"REPARADO\",\"VALIDACION CON EL CLIENTE\" ")
+        
  
     this.servhttp.consultaQueja(parametros)
        .subscribe(data=>{
         this.visibleLoad=false;
-        if(data[0]["mensaje"]=="Correcto" )
+        if(data["codigo"]=="0" )
                            {
                              
-                             this.dataSource  =  new MatTableDataSource<Queja>(data)  ;
+                             this.dataSource  =  new MatTableDataSource<Queja>(data['data']) ;
                              this.dataSource.paginator = this.paginator;
                            }
                         else{
@@ -103,6 +111,7 @@ consultaQueja(queja)
 
 private armaStrQuerry(strQuejas)
 {
+  
   let querry:string ="";
     
   if (strQuejas==="" || strQuejas ===undefined)
@@ -139,13 +148,13 @@ private regresaServiciosValidos()
       servicio = "\"ENLACE DEDICADO\"";
     break;
     case 'INX':
-      servicio = "\"INTERCONEXION\"";
+      servicio = "\"INTERCONEXION\", \"PORTABILIDAD\", \"TRAFICO\", \"COUBICACION\"";
     break;
     case 'AUX':
-      servicio = "\"PORTABILIDAD\",\"DESAGREGACION\",\"SOPORTE UNINET\"";
+      servicio = "\"DESAGREGACION\",\"SOPORTE UNINET\"";
     break;
     case 'CMP':
-      servicio = "\"COUBICACION\",\"COMPARTICION\",\"SOPORTE UNINET\"";
+      servicio = "\"COMPARTICION\"";
     break;
   }
 
@@ -204,6 +213,8 @@ limpiaQueja(queja)
   
   selecionDato(dato)
   {
+    console.log(dato);
+    
     this.variables.setQuejaSeleccionada(dato);
    this.esvisibleDetalle=true;
    this.detallequeja.muestraDetalle();
@@ -242,7 +253,8 @@ limpiaQueja(queja)
     prioridad:  queja.prioridad,
     problemaReportado: queja.problemaReportado,
     referencia:queja.referencia,
-    validacionCliente: queja.validacionCliente
+    validacionCliente: queja.validacionCliente,  
+    notificadoPor: queja.notificadoPor
 
   }]; 
     

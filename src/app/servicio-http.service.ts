@@ -13,20 +13,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders,HttpParams} from '@angular/common/http';
 import {ServicioVarialesGlobalesService } from'./servicio-variales-globales.service';
-import {Referencia} from './bean/bean-referencia'
-import { BeanABCQueja } from './bean/bean-abcqueja';
-import { Queja } from './bean/bean-queja';
-import {Interconeccion} from './bean/bean-interconeccion';
 import { Contacto } from './bean/bean-contacto';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpErrorResponse} from '@angular/common/http';
-import { Bitacora } from './bean/bean-bitacora';
-import {TipoServicio} from './bean/bean-tiposervicio';
-import {BeanCatCaoNIR} from './bean/bean-ciudad';
-import {BeanCatCaoCentralEqp} from './bean/bean-central';
-import {BeanCatCaoOpcDpcIp} from './bean/bean-ip';
+import { BeanABCQueja } from './bean/bean-abcqueja';
 import { BeanBuscar } from './bean/bean-comparticion';
+import { RespuestaReferencia } from './bean/bean-referencia-resp';
+import { RespuestaQueja } from './bean/bean-queja-resp';
+import { RespuestaBitacora } from './bean/bean-bitacora-resp';
+import { RespuestaTipoServicio } from './bean/bean-tiposervicio-resp';
+import { RespuestaContacto } from './bean/bean-contacto-resp';
+import { RespuestaInterconeccion } from './bean/bean-interconeccion-resp';
+import { RespuestaBeanCatCaoNIR } from './bean/bean-ciudad-resp';
+import { RespuestaBeanCatCaoCentralEqp } from './bean/bean-central-resp';
+import { RespuestaBeanCatCaoOpcDpcIp } from './bean/bean-ip-resp';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,7 @@ export class ServicioHttpService {
    .set('Content-Type', 'application/json')
    .set('Accept', 'application/json')
 
-   return  this.http.get<TipoServicio[]>("/ServiceSeg/subtiposervicio",{headers: httpOptions, params:parametros})
+   return  this.http.get<RespuestaTipoServicio>("/ServiceSeg/subtiposervicio",{headers: httpOptions, params:parametros})
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;   
   }
 
@@ -84,7 +85,7 @@ export class ServicioHttpService {
    .set('Content-Type', 'application/json')
    .set('Accept', 'application/json')
    
-    return  this.http.get<Referencia[]>("/IfaceSeg2/referencia",{headers: httpOptions, params:parametros})
+    return  this.http.get<RespuestaReferencia>("/IfaceSeg2/referencia",{headers: httpOptions, params:parametros})
    //return this.http.get<Referencia[]>("/MSServicio/webapi/servicioprueba",{headers: httpOptions, params:parametros})      
    .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
    
@@ -111,7 +112,7 @@ export class ServicioHttpService {
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<Queja[]>("/IfaceSeg2/consultaqueja",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaQueja>("/IfaceSeg2/consultaqueja",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 }
 
@@ -146,7 +147,7 @@ consultaBitacora(parametros:HttpParams)
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
 
-  return  this.http.get<Bitacora[]>("/IfaceSeg2/bitacora",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaBitacora>("/IfaceSeg2/bitacora",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 }
 
@@ -170,7 +171,7 @@ consultaContactos(parametros:HttpParams)
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<Contacto[]>("/IfaceSeg2/contacto",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaContacto>("/IfaceSeg2/contacto",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }
@@ -303,7 +304,7 @@ consultaInterconeccion(  parametros:HttpParams)
  .set('Content-Type', 'application/json')
  .set('Accept', 'application/json')
  
-  return  this.http.get<Interconeccion[]>("/IfaceSeg2/sidecci",{headers: httpOptions, params:parametros})
+  return  this.http.get<RespuestaInterconeccion>("/IfaceSeg2/sidecci",{headers: httpOptions, params:parametros})
  .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
  
 }
@@ -327,7 +328,7 @@ consultaCiudad(parametros:HttpParams)
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<BeanCatCaoNIR[]>("/IfaceSeg2/ciudad",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaBeanCatCaoNIR>("/IfaceSeg2/ciudad",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }
@@ -350,7 +351,7 @@ consultaCentral(parametros:HttpParams)
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<BeanCatCaoCentralEqp[]>("/IfaceSeg2/central",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaBeanCatCaoCentralEqp>("/IfaceSeg2/central",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }
@@ -374,7 +375,7 @@ consultaOperador(parametros:HttpParams)
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<BeanCatCaoOpcDpcIp[]>("/IfaceSeg2/ips",{headers: httpOptions, params:parametros} )
+  return  this.http.get<RespuestaBeanCatCaoOpcDpcIp>("/IfaceSeg2/ips",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }
@@ -398,7 +399,7 @@ consultaSICEG11(parametros:HttpParams)
   const httpOptions = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  return  this.http.get<BeanBuscar[]>("/IfaceSeg2/consultaElemento",{headers: httpOptions, params:parametros} )
+  return  this.http.get<BeanBuscar>("/IfaceSeg2/consultaElemento",{headers: httpOptions, params:parametros} )
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }

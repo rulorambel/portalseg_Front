@@ -1,21 +1,19 @@
 
 /**************************************************************************************  <
 *
-*   @Author:		  RuloRamBel
-*   @Date:		    11/11/2019
-*   @update:      11/11/2019  
+*   @Author:		  Anahi Flores
+*   @Date:		    17/03/2020  
+*   @update:      17/03/2020  
 *   @Version:      1.0
-*   @Class       AltaQuejaCmpComponent
+*   @Class       AltaQuejaComponent
 *-------------------------------------------------------------------------------------
 *   @Objetivo:    Se encarga de dar de Alta una Queja
 *
 **************************************************************************************/
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpParams} from '@angular/common/http';
-import { FormControl,Validators,  FormGroup, RequiredValidator} from '@angular/forms';
-import { BeanABCQueja } from '../bean/bean-abcqueja';
+import { FormControl,Validators,  FormGroup} from '@angular/forms';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import { DialogInformComponent} from '../dialog-inform/dialog-inform.component';
 import { ServicioHttpService} from'../servicio-http.service';
 import { InterlocutoresSitioComponent} from '../interlocutores-sitio/interlocutores-sitio.component';
 import { ServicioVarialesGlobalesService} from '../servicio-variales-globales.service';
@@ -24,13 +22,13 @@ import { DatePipe } from '@angular/common';
 
 
 @Component({
-  selector: 'app-alta-queja-cmp',
-  templateUrl: './alta-queja-cmp.component.html',
-  styleUrls: ['./alta-queja-cmp.component.css']
+  selector: 'app-alta-queja-aux',
+  templateUrl: './alta-queja-aux.component.html',
+  styleUrls: ['./alta-queja-aux.component.css']
 })
 
 
-export class AltaQuejaCMPComponent implements OnInit {
+export class AltaQuejaAUXComponent implements OnInit {
   FormularioAlta:FormGroup;
   disabled_btnCreaQueja:string="false";
  
@@ -56,7 +54,6 @@ CaracteristicaDet:any;
     this.FormularioAlta= this.createFormGroup();
     this.filtraFallas();
     this.generarCadenaFallas();
-    this.FormularioAlta.get("GeoLatitud").setValue(this.variables.getGeoLatitud());
    }
 
    ngOnInit() {
@@ -75,24 +72,24 @@ CaracteristicaDet:any;
 *   @return:     
 *
 **************************************************************************************/
-crearQueja()
-{
- this.disabled_btnCreaQueja="true";
+  crearQueja()
+  {
+   this.disabled_btnCreaQueja="true";
 
- if (this.interlocutores.FormularioContacto.status =="INVALID")
-    {
-      this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
-      this.disabled_btnCreaQueja="false";
-      return;
-     }
-     if (this.FormularioAlta.status =="INVALID")
-     {
-       this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
-       this.disabled_btnCreaQueja="false";
-       return;
-      }
-      this.enviaQueja();
-}
+   if (this.interlocutores.FormularioContacto.status =="INVALID")
+      {
+        this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta del Interlocutor","Error");
+        this.disabled_btnCreaQueja="false";
+        return;
+       }
+       if (this.FormularioAlta.status =="INVALID")
+       {
+         this.variables.muestraBarra("Para crear una Queja es necesario contar con la información correcta","Error");
+         this.disabled_btnCreaQueja="false";
+         return;
+        }
+        this.enviaQueja();
+  }
 
  /**************************************************************************************  
 *   Crea el formulario para la alta de la Queja
@@ -122,12 +119,7 @@ crearQueja()
         HrAccesoFin     : new FormControl('', [Validators.required]),
         Observaciones   : new FormControl('' ),
         Caracteristica  : new FormControl('' ),
-        FolioCliente    : new FormControl('', [Validators.required]),
-        IdNis           : new FormControl('' ),
-        GeoLatitud      : new FormControl('' ),
-        TipoElemento    : new FormControl('' ),
-        GeoLongitud     : new FormControl('' ),
-        IdElemento      : new FormControl('' ),
+        FolioCliente    : new FormControl('', [Validators.required])
 
       });
   }
@@ -166,9 +158,10 @@ private enviaQueja()
     this.disabled_btnCreaQueja="false";
     dialogo.close();
     console.log(data);
+    
     if(data["codigoDeRespuesta"]== "10000" )
     {
-      data["descripcionDelError"] = "Se ha Creado el Incidente :"+ data["identificadorDeQueja"] ;
+      data["descripcionDelError"] = "Se ha Creado el Incidente: "+ data["identificadorDeQueja"] ;
 
       this.openDialog(data) ;
        }
@@ -222,7 +215,7 @@ console.log (this.generarCadenaFallas());
                       +"<ApellidoMaternoDeContactoEnSitio>"+this.valoresContacto(this.interlocutores.FormularioContacto.value["ContSitContacto"],"apellidoMaterno")+"</ApellidoMaternoDeContactoEnSitio>"
                       +"<TelefonoDeContactoEnSitio>"+ this.interlocutores.FormularioContacto.value["ContSitTelefono"]+"</TelefonoDeContactoEnSitio>"
                       +"<MovilDeContactoEnSitio>"+this.interlocutores.FormularioContacto.value["ContSitCelular"]+"</MovilDeContactoEnSitio>"
-                      +"<NombreDeContactoParaSeguimiento>"+ this.variables.getNombre()+"</NombreDeContactoParaSeguimiento>"
+                      +"<NombreDeContactoParaSeguimiento>"+this.variables.getNombre()+"</NombreDeContactoParaSeguimiento>"
                       +"<ApellidoPaternoDeContactoParaSeguimiento>"+ this.variables.getApep()+"</ApellidoPaternoDeContactoParaSeguimiento>"
                       +"<ApellidoMaternoDeContactoParaSeguimiento>"+ this.variables.getApem()+"</ApellidoMaternoDeContactoParaSeguimiento>"
                       +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
@@ -233,11 +226,11 @@ console.log (this.generarCadenaFallas());
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
                       +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
                       +"<DatosServicioDeComparticion>"
-                      +"<IdentificadorNISDeServicio>"+this.variables.getIdNis()+"</IdentificadorNISDeServicio>"
-                          +"<GeolocalizacionLongitud>"+this.variables.getGeoLatitud()+"</GeolocalizacionLongitud>"
-                          +"<GeolocalizacionLatitud>"+this.variables.getGeoLongitud()+"</GeolocalizacionLatitud>"
-                          +"<TipoDeElemento>"+this.variables.getTipoElemento()+"</TipoDeElemento>"
-                          +"<IdentificadorElemento>"+this.variables.getIdElemento()+"</IdentificadorElemento>"
+                      +"<IdentificadorNISDeServicio></IdentificadorNISDeServicio>"
+                          +"<GeolocalizacionLongitud></GeolocalizacionLongitud>"
+                          +"<GeolocalizacionLatitud></GeolocalizacionLatitud>"
+                          +"<TipoDeElemento></TipoDeElemento>"
+                          +"<IdentificadorElemento></IdentificadorElemento>"
                       +"</DatosServicioDeComparticion>"
                       +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<Origen1></Origen1>"
@@ -258,7 +251,6 @@ console.log (this.generarCadenaFallas());
                       +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
                       +"<Comentarios>"+this.DescripFalla.value+"</Comentarios>"
                       +"<FolioDelCliente>"+this.FolioCliente.value+"</FolioDelCliente>"
-
           +"</SolicitudAseguramiento>"
           +"<DatosControl>"
               +"<IdCorrelacion>" + this.getIDCorre ()+"</IdCorrelacion>"
@@ -282,13 +274,10 @@ console.log (this.generarCadenaFallas());
   get CentralOrigen (){return this.FormularioAlta.get('CentralOrigen');}
   get CentralDestino (){return this.FormularioAlta.get('CentralDestino');}
   get CIC (){return this.FormularioAlta.get('CIC');}
-  get IdNis  (){return this.FormularioAlta.get('IdNis');}
-  get GeoLatitud (){return this.FormularioAlta.get('GeoLatitud');}
-  get TipoElemento (){return this.FormularioAlta.get('TipoElemento');}
-  get GeoLongitud (){return this.FormularioAlta.get('GeoLongitud');}
-  get IdElemento (){return this.FormularioAlta.get('IdElemento');}
   get Observaciones (){return this.FormularioAlta.get('Observaciones');}
 
+  
+  
   private getIDCorre()
   {
     let d = new Date();
@@ -338,7 +327,6 @@ console.log (this.generarCadenaFallas());
     config.data=data;
     config.backdropClass='dialog-backdrop';
     
-    const dlg = this.dialogRef.open(DialogInformComponent,config );
     
     }
 
@@ -599,16 +587,14 @@ return valor;
     case 'apellidoPaterno':
 
     if (tamano >= 3)
-   {  
-      valor = arrayDeCadenas[tamano -2];
+   {   valor = arrayDeCadenas[tamano -2];
    }
-      else
-      { 
+      else{ 
         valor= arrayDeCadenas [1];
       }
       return valor;
     break;
-                                                                     
+
     case 'apellidoMaterno':
       if (tamano >= 3)
       valor = arrayDeCadenas[tamano-1];
@@ -620,16 +606,4 @@ return valor;
 
  } 
 
- public llenaSICEG11() 
- {
-
-  console.log("entra al llenaSICEG11" );
-
-  this.FormularioAlta.get("IdNIS").setValue(this.variables.getIdNis());
-  this.FormularioAlta.get("GeoLatitud").setValue(this.variables.getGeoLatitud());
-  this.FormularioAlta.get("GeoLongitud").setValue(this.variables.getGeoLongitud());
-  this.FormularioAlta.get("TipoElemento").setValue(this.variables.getTipoElemento());
-  this.FormularioAlta.get("IdElemento").setValue(this.variables.getIdElemento());
- 
- }
 }

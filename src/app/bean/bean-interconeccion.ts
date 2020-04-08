@@ -40,4 +40,5 @@ export interface Interconeccion
         Dpc:string;
         Tecnologia:string;
         IdCia:string;
+        tipo:string;
 }

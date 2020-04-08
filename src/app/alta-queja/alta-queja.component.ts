@@ -1,6 +1,5 @@
 
 /**************************************************************************************  <
-*
 *   @Author:		  RuloRamBel
 *   @Date:		    11/11/2019
 *   @update:      11/11/2019  
@@ -12,8 +11,7 @@
 **************************************************************************************/
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpParams} from '@angular/common/http';
-import { FormControl,Validators,  FormGroup, RequiredValidator} from '@angular/forms';
-import { BeanABCQueja } from '../bean/bean-abcqueja';
+import { FormControl,Validators,  FormGroup} from '@angular/forms';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
 import { DialogInformComponent} from '../dialog-inform/dialog-inform.component';
 import { ServicioHttpService} from'../servicio-http.service';
@@ -122,6 +120,7 @@ CaracteristicaDet:any;
         Observaciones   : new FormControl('' ),
         Caracteristica  : new FormControl('' ),
         FolioCliente    : new FormControl('', [Validators.required])
+
       });
   }
 
@@ -165,6 +164,7 @@ private enviaQueja()
       data["descripcionDelError"] = "Se ha Creado el Incidente: "+ data["identificadorDeQueja"] ;
 
       this.openDialog(data) ;
+      this.limpiarPantallaAlta();
        }
     else
      {
@@ -174,7 +174,7 @@ private enviaQueja()
       this.variables.muestraBarra(strerror.substr(0,strerror.indexOf(".")),"ERROR" );
 
     }
-    this.limpiarPantallaAlta();
+    //this.limpiarPantallaAlta();
   });
  
 }
@@ -222,32 +222,36 @@ console.log (this.generarCadenaFallas());
                       +"<TelefonoDeContactoParaSeguimiento>"+this.variables.getTelefono()+"</TelefonoDeContactoParaSeguimiento>"
                       +"<MovilDeContactoParaSeguimiento>"+this.variables.getCelular()+"</MovilDeContactoParaSeguimiento>"
                       +"<CorreoDeContactoParaSeguimiento>"+this.variables.getCorreo()+"</CorreoDeContactoParaSeguimiento>"
-                      +"<DescripcionDetalladaDeFalla>"+ this.DescripFalla.value +"</DescripcionDetalladaDeFalla>"
+                      +"<DescripcionDetalladaDeFalla>"+((this.Observaciones.value == null || this.Observaciones.value == '')?'SOLICITUD A REGISTRAR':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
                       +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
                       +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
                       +"<DatosServicioDeComparticion>"
-                      +"<IdentificadorNISDeServicio>"+this.variables.getIdNis()+"</IdentificadorNISDeServicio>"
-                          +"<GeolocalizacionLongitud>"+this.variables.getGeoLatitud()+"</GeolocalizacionLongitud>"
-                          +"<GeolocalizacionLatitud>"+this.variables.getGeoLongitud()+"</GeolocalizacionLatitud>"
-                          +"<TipoDeElemento>"+this.variables.getTipoElemento()+"</TipoDeElemento>"
-                          +"<IdentificadorElemento>"+this.variables.getIdElemento()+"</IdentificadorElemento>"
+                      +"<IdentificadorNISDeServicio></IdentificadorNISDeServicio>"
+                          +"<GeolocalizacionLongitud></GeolocalizacionLongitud>"
+                          +"<GeolocalizacionLatitud></GeolocalizacionLatitud>"
+                          +"<TipoDeElemento></TipoDeElemento>"
+                          +"<IdentificadorElemento></IdentificadorElemento>"
                       +"</DatosServicioDeComparticion>"
                       +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
-                      +"<Origen1>"+this.variables.getOrigen()+"</Origen1>"
-                      +"<Destino1>"+this.variables.getDestino()+"</Destino1>"
-                      +"<Origen2>3</Origen2>"
-                      +"<Destino2>4</Destino2>"
-                      +"<IPOrigen>"+this.variables.getipOrigen()+"</IPOrigen>"
-                      +"<IPDestino>"+this.variables.getipDestino()+"</IPDestino>"
-                      +"<TDD-IDO>"+this.variables.getIDO()+"</TDD-IDO>"
-                      +"<TDD-IDD>"+this.variables.getIDD()+"</TDD-IDD>"
-                      +"<TDD-10D>"+this.variables.getDigitos()+"</TDD-10D>"
-                      +"<PortID>"+this.variables.getPortID()+"</PortID>"
-                      +"<CIC>"+this.variables.getCIC()+"</CIC>"
+                      +"<Origen1></Origen1>"
+                      +"<Destino1></Destino1>"
+                      +"<Origen2></Origen2>"
+                      +"<Destino2></Destino2>"
+                      +"<IPOrigen></IPOrigen>"
+                      +"<IPDestino></IPDestino>"
+                      +"<TDD-IDO></TDD-IDO>"
+                      +"<TDD-IDD></TDD-IDD>"
+                      +"<TDD-10D></TDD-10D>"
+                      +"<PortID></PortID>"
+                      +"<CIC></CIC>"
+                      +"<CentralOrigenOCPIP></CentralOrigenOCPIP>"
+                      +"<CentralDestinoDCPIP></CentralDestinoDCPIP>"
                   +"</DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<FallaMasiva></FallaMasiva>"
                       +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
+                      +"<Comentarios>"+this.DescripFalla.value+"</Comentarios>"
+                      +"<FolioDelCliente>"+this.FolioCliente.value+"</FolioDelCliente>"
           +"</SolicitudAseguramiento>"
           +"<DatosControl>"
               +"<IdCorrelacion>" + this.getIDCorre ()+"</IdCorrelacion>"
@@ -266,11 +270,7 @@ console.log (this.generarCadenaFallas());
   get HrAccesoFin  (){return this.FormularioAlta.get('HrAccesoFin');}
   get FolioCliente (){return this.FormularioAlta.get('FolioCliente');}
   get Caracteristica (){return this.FormularioAlta.get('Caracteristica');}
-  get IdNis  (){return this.FormularioAlta.get('IdNis');}
-  get GeoLatitud (){return this.FormularioAlta.get('GeoLatitud');}
-  get TipoElemento (){return this.FormularioAlta.get('TipoElemento');}
-  get GeoLongitud (){return this.FormularioAlta.get('GeoLongitud');}
-  get IdElemento (){return this.FormularioAlta.get('IdElemento');}
+  get Observaciones (){return this.FormularioAlta.get('Observaciones');}
 
   
   
@@ -322,8 +322,7 @@ console.log (this.generarCadenaFallas());
     
     config.data=data;
     config.backdropClass='dialog-backdrop';
-    
-    const dlg = this.dialogRef.open(DialogInformComponent,config );
+    this.dialogRef.open(DialogInformComponent, config);
     
     }
 

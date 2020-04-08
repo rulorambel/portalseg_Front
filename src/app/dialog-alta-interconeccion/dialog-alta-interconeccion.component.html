@@ -12,7 +12,7 @@
 					<td> <mat-label>Tipo</mat-label></td>
                           <td>
 							  <mat-form-field style="width: 80%;"> 
-									<mat-select #lselTipo formControlName="Tipo">
+									<mat-select #lselTipo formControlName="Tipo" [disabled]="true">
 									<mat-option  value="PNT">PNT</mat-option>  
 									<mat-option value="TNT">TNT</mat-option>
 								  </mat-select>
@@ -24,7 +24,8 @@
                 </td>
                 <td colspan="1">
                     <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #txtOrigen  formControlName="Origen" (blur)="buscaOrigen()">             
+                        <input matInput #txtOrigen (keypress)="variables.numberOnly($event)" size="20" minlength="10" maxlength="20" formControlName="Origen" 
+						(blur)="buscaOrigen()">             
                     </mat-form-field>
                     <div *ngIf="Origen.invalid" class="validadorerror"><span>Origen es <strong>Requerido</strong></span></div>
 				</td>
@@ -33,7 +34,7 @@
 				</td>
 				<td colspan="1">
 					<mat-form-field class="example-full-width" style="width: 95%;">
-                <input matInput #txtDestino  formControlName="Destino" (blur)="buscaDestino()">          
+                <input matInput #txtDestino (keypress)="variables.numberOnly($event)" size="20" minlength="10" maxlength="20" formControlName="Destino" (blur)="buscaDestino()">          
 					</mat-form-field>
 				<div *ngIf="Destino.invalid" class="validadorerror"><span>Destino es <strong>Requerido</strong></span></div>
 				</td>
@@ -44,7 +45,7 @@
                 </td>
                 <td colspan="1">
                     <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()">           
+                        <input matInput #txtIpOrigen  formControlName="IpOrigen" (blur)="buscaIpOrigen()">           
                     </mat-form-field>
                     <div *ngIf="IpOrigen.invalid" class="validadorerror"><span>IP Origen/OPC es <strong>Requerido</strong></span></div>
 				</td>
@@ -66,7 +67,7 @@
                 <td>
                     <mat-form-field style="width: 80%;">
                         <mat-label>IDO*</mat-label>
-                        <input matInput #txtIDO  formControlName="IDO"  (blur)="buscaIDO()">          
+                        <input matInput #txtIDO (keypress)="variables.numberOnly($event)" size="3"  maxlength="3"  formControlName="IDO"  (blur)="buscaIDO()">          
                     </mat-form-field>
                     <div *ngIf="IDO.invalid" class="validadorerror"><span>IDO es <strong>Requerido</strong></span></div>
 				</td>
@@ -74,7 +75,7 @@
 				<td>
 					<mat-form-field style="width: 80%;">
 						<mat-label>IDD*</mat-label>
-						<input matInput #txtIDD  formControlName="IDD" (blur)="buscaIDD()">         
+						<input matInput #txtIDD  (keypress)="variables.numberOnly($event)" size="3"  maxlength="3"  formControlName="IDD" (blur)="buscaIDD()">         
 					</mat-form-field>
 					<div *ngIf="IDD.invalid" class="validadorerror"><span>IDD es <strong>Requerido</strong></span></div>
 				</td>
@@ -82,18 +83,18 @@
 				<td>
 					<mat-form-field style="width: 80%;">
 						<mat-label>10 Dígitos*</mat-label>
-			            <input matInput #txtDigitos  type="text" size="10"  maxlength="10" formControlName="Digitos" required>   
+			            <input matInput #txtDigitos (keypress)="variables.numberOnly($event)" size="10"  maxlength="10" formControlName="Digitos" required>   
 					</mat-form-field>
 					<div *ngIf="Digitos.invalid" class="validadorerror"><span>Digitos es <strong>Requerido</strong></span></div>
 				</td>
 				</tr>
 
                 <td>
-                     <mat-label>Port ID</mat-label>
+                     <mat-label>Port ID </mat-label>
                 </td>
 					<td colspan="1">
 						<mat-form-field class="example-full-width" style="width: 150%;">
-							<input matInput #txtPortID  type="text" formControlName="PortID" required>          
+							<input matInput #txtPortID (keypress)="variables.numberOnly($event)" size="23" minlength="21" maxlength="23"  formControlName="PortID" [required]="Tipo.value == 'PNT'">          
 						</mat-form-field>
 						<div *ngIf="PortID.invalid" class="validadorerror"><span>Port ID es <strong>Requerido</strong></span></div>
 				</td>
@@ -159,15 +160,7 @@
 						</mat-form-field>
 				</td>
 
-				<tr>
-				<td>
-						<mat-label>CIC</mat-label>
-				</td>
-					<td colspan="3">
-						<mat-form-field class="example-full-width" style="width: 95%;">
-							<input matInput #txtCIC  formControlName="CIC">       
-						</mat-form-field>
-					</td>
+				
 				
                     <tr>
                         <td colspan="2" align="Center">

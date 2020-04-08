@@ -13,5 +13,5 @@ export interface Queja {
 	problemaReportado:  string;
 	referencia: string;
 	validacionCliente: string;
-	
+	notificadoPor: string;
 }

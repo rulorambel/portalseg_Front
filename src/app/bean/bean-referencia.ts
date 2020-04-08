@@ -1,5 +1,5 @@
 export interface Referencia {
-    referencia: string ;
+	referencia: string ;
 	CUCEmpresarial: string ;
 	cliente: string ;
 	folio: string ;
@@ -7,5 +7,4 @@ export interface Referencia {
 	puntas: string ;
 	domicilio:string ;
 	empresa: string ;
-	mensaje:string,
 }

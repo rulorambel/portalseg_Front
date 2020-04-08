@@ -1,8 +1,8 @@
 <div class="mat-elevation-z8" aling="center">
     <div  [formGroup]="FormularioAlta"><!--(ngSubmit)="enviarForm()" > --> 
     <table style="width: 100%;" >
-        
-        <tr>
+
+            <tr>
                 <td >
                     <div class="divcabecera"><label class="lblcabecera">Contactos en Sitios</label></div> 
                  </td>
@@ -18,194 +18,11 @@
             </td>
             <tr>
                 <td>
-                    <div class="divcabecera">Datos de Servicio de Interconexión</div> 
-                 </td>
-            </tr>
-            <table  style="width: 100%;" >
-            <tr>
-                <td> <mat-label>IP Origen/OPC </mat-label></td>
-                <td>
-                    <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #txtIpOrigen  formControlName="IpOrigen"  (blur)="buscaIpOrigen()" [required]="!variables.getBndAlta()">           
-                    </mat-form-field>
-                    <div *ngIf="IpOrigen.invalid && !variables.getBndAlta() "  class="validadorerror"><span>IP Origen/OPC es <strong>Requerido</strong></span></div> 
-                 <td> <mat-label>IP Destino/OPC</mat-label></td>
-                 <td>
-                        <mat-form-field class="example-full-width" style="width: 95%;">  
-                            <input matInput #txtIpDestino  formControlName="IpDestino" (blur)="buscaIpDestino()" [required]="!variables.getBndAlta()">           
-                        </mat-form-field>
-                        <div *ngIf="IpDestino.invalid && !variables.getBndAlta() "  class="validadorerror"><span>IP Destino/OPC es <strong>Requerido</strong></span></div>   
-                 </td>
-            </tr>
-            <tr>
-                    <td> <mat-label>Central Origen (OPC/IP)</mat-label></td>
-                    <td>
-                        <mat-form-field class="example-full-width" style="width: 95%;"> 
-							<input matInput #CentralOrigen readonly formControlName="CentralOrigen">      
-						</mat-form-field>
-                     </td>
-
-                     <td> <mat-label>Central Destino (DPC/IP)</mat-label></td>
-                   <td>
-                    <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #CentralDestino readonly formControlName="CentralDestino">          
-                    </mat-form-field>
-                 </td>
-            </tr>
-            <tr>
-                <td> <mat-label>CIC</mat-label></td>
-                <td>
-                    <mat-form-field class="example-full-width" style="width: 95%;">
-                        <input matInput #txtCIC  formControlName="CIC">       
-                    </mat-form-field>
-                </td>
-            </tr>
-            </table>
-            <tr>
-                <td>
-                    <div class="divcabecera">Datos de Servicio de Interconexión PNT-TNT</div>
-                </td>
-            </tr>
-            <table style="width: 100%;">
-                <tr>
-                    <td>
-                        <mat-label>Origen</mat-label>
-                    </td>
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">
-                            <input matInput #txtOrigen readonly formControlName="Origen" [value]="variables.getOrigen()">
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-label>Destino</mat-label>
-                    </td>
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">
-                            <input matInput #txtDestino  readonly formControlName="Destino" [value]="variables.getDestino()">
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                            <mat-label>IP Origen/OPC</mat-label>
-                    </td>
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">
-                            <input matInput #txtIpOrigen readonly formControlName="IpOrigen" [value]="variables.getIpOrigen()">           
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-label>IP Destino/OPC</mat-label>
-                    </td>
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">  
-                            <input matInput #txtIpDestino readonly  formControlName="IpDestino" [value]="variables.getIpDestino()">           
-                        </mat-form-field>
-                    </td>
-                    </tr>
-                <tr>
-                    <td colspan="1">
-                        <mat-label>TDD</mat-label>
-                    </td>
-                    <td>
-                        <mat-form-field style="width: 80%;">
-                            <mat-label>IDO*</mat-label>
-                            <input matInput #txtIDO readonly formControlName="IDO" [value]="variables.getIDO()">
-                        </mat-form-field>
-                    </td>
-
-                    <td>
-                        <mat-form-field style="width: 80%;">
-                            <mat-label>IDD*</mat-label>
-                            <input matInput #txtIDD readonly formControlName="IDD" [value]="variables.getIDD()">
-                        </mat-form-field>
-                        <div *ngIf="IDD.invalid" class="validadorerror"><span>IDD es <strong>Requerido</strong></span></div>
-                    </td>
-
-                    <td>
-                        <mat-form-field style="width: 80%;">
-                            <mat-label>10 Dígitos*</mat-label>
-                            <input matInput #txtDigitos readonly formControlName="Digitos" [value]="variables.getDigitos()">
-                        </mat-form-field>
-                    </td>
-                </tr>
-
-                <td>
-                    <mat-label>Port ID</mat-label>
-                </td>
-                <td colspan="1">
-                    <mat-form-field class="example-full-width" style="width: 150%;">
-                        <input matInput #txtPortID readonly formControlName="PortID" [value]="variables.getPortID()">
-                    </mat-form-field>
-                </td>
-
-                <tr>
-                    <td>
-                        <mat-label>Operador Origen (IDO)</mat-label>
-                    </td>
-
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">
-                            <input matInput #OperadorOrigen readonly formControlName="OperadorOrigen" [value]="variables.getOperadorOrigen()" >
-                        </mat-form-field>
-                    </td>
-
-                    <td>
-                        <mat-label>Operador Destino (IDD)</mat-label>
-                    </td>
-                    <td colspan="1">
-                        <mat-form-field class="example-full-width" style="width: 95%;">
-                            <input matInput #OperadorDestino readonly formControlName="OperadorDestino" [value]="variables.getOperadorDestino()">
-                        </mat-form-field>
-                    </td>
-
-                    <tr>
-                        <td>
-                            <mat-label>Ciudad Origen (NIR)</mat-label>
-                        </td>
-                        <td colspan="1">
-                            <mat-form-field class="example-full-width" style="width: 95%;">
-                                <input matInput #CiudadOrigen readonly formControlName="CiudadOrigen" [value]="variables.getCiudadOrigen()">
-                            </mat-form-field>
-                        </td>
-
-                        <td>
-                            <mat-label>Ciudad Destino (NIR)</mat-label>
-                        </td>
-
-                        <td colspan="1">
-                            <mat-form-field class="example-full-width" style="width: 95%;">
-                                <input matInput #CiudadDestino readonly formControlName="CiudadDestino" [value]="variables.getCiudadDestino()">
-                            </mat-form-field>
-                        </td>
-
-                        <tr>
-                            <td>
-                                <mat-label>Central Origen (OPC/IP)</mat-label>
-                            </td>
-
-                            <td colspan="1">
-                                <mat-form-field class="example-full-width" style="width: 95%;">
-                                    <input matInput #CentralOrigen readonly formControlName="CentralOrigen" [value]="variables.getCentralOrigen()">
-                                </mat-form-field>
-                            </td>
-
-                            <td>
-                                <mat-label>Central Destino (DPC/IP)</mat-label>
-                            </td>
-
-                            <td colspan="1">
-                                <mat-form-field class="example-full-width" style="width: 95%;">
-                                    <input matInput #CentralDestino readonly formControlName="CentralDestino" [value]="variables.getCentralDestino()">
-                                </mat-form-field>
-                            </td>
-            </table>
-            <tr>
-                <td>
                    <div class="divcabecera"><label class="lblcabecera">Datos Generales del Incidente</label></div> 
                 </td>
             </tr>
             <tr>
+             
             </tr>
             <tr>
                   <table  style="width: 100%;" >
@@ -214,6 +31,7 @@
                       <td>
                           <mat-form-field style="width: 80%;" > 
                               <mat-select #lselSeveridad formControlName="Severidad"  required>
+                                <mat-option>--</mat-option>
                                 <mat-option value="1">1</mat-option>
                                 <mat-option value="2">2</mat-option>
                                 <mat-option value="3">3</mat-option>
@@ -240,7 +58,7 @@
                             <mat-label>Característica Detallada</mat-label>
                         </td>
                         <td colspan="2">
-                          <mat-form-field style="width: 80%;"> 
+                          <mat-form-field style="width: 93%;"> 
                               <mat-select  #lselCaracteristica formControlName="Caracteristica" >
                                 <mat-option>-Seleccionar Caracteristica-</mat-option>
                                 <mat-option *ngFor="let item of CaracteristicaDet" [value]="item.name">
@@ -348,13 +166,13 @@
                         </div>
                             </td>
                             <td>
-                                <mat-label>Observaciones</mat-label>
-                        </td>
-                        <td colspan="3">
-                                <mat-form-field class="example-full-width" style="width: 95%;">
-                                    <input matInput  formControlName="Observaciones"  >        
-                                </mat-form-field>
-                        </td>
+                                    <mat-label>Observaciones</mat-label>
+                            </td>
+                            <td colspan="3">
+                                    <mat-form-field class="example-full-width" style="width: 95%;">
+                                        <input matInput  formControlName="Observaciones"  >        
+                                    </mat-form-field>
+                            </td>
                         </tr>
                  </table>
             </tr>		                

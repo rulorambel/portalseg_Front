@@ -122,14 +122,14 @@
                                    </tr>
                                    <tr>
                                            <td >
-                                       <button mat-raised-button class="buttons" (click)="actualizarQueja()" >Refrescar</button>
+                                       <button mat-raised-button class="buttons" (click)="actualizarQueja()" [disabled]="disabled_SIPO">Refrescar</button>
                                       
 
                                            </td>
                                    </tr>
                                    <tr>
                                     <td >
-                                      <button mat-raised-button class="buttons" (click)="consultaBitacora()"  >Actualizar</button>
+                                      <button mat-raised-button class="buttons" (click)="consultaBitacora()" [disabled]="disabled_SIPO" >Actualizar</button>
                                     </td>
                             </tr>
                         
@@ -149,11 +149,11 @@
                <tr>
                        <td colspan="3" >
                            <mat-form-field class="area-full-width" style="width: 95%;">
-                               <textarea matInput #txtComentarios placeholder="Notificación al Centro de Atención" (keyup)="escribeComentario($event)" ></textarea>
+                               <textarea matInput #txtComentarios placeholder="Notificación al Centro de Atención" (keyup)="escribeComentario($event)" [disabled]="disabled_SIPO"></textarea>
                            </mat-form-field>
                        </td>
                        <td >
-                               <button mat-raised-button  class="buttons" [disabled]="disabled_btnEnviar"  (click)="enviaActualizacion(txtComentarios,ServicioOK)" >Enviar</button>
+                               <button mat-raised-button  class="buttons" [disabled]=disabled_btnEnviar  (click)="enviaActualizacion(txtComentarios,ServicioOK)">Enviar</button>
                            </td>
                       
                    </tr>
