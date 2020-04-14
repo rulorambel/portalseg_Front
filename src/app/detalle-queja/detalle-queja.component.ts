@@ -440,7 +440,7 @@ public enviaActualizacion(objtxt , objchk)
     +"<SolicitudAseguramiento>"
     +"<IdentificadorDeQueja>"+this.lblQueja+"</IdentificadorDeQueja>"
     +"<NombreDeUsuarioDeEmpresa>"+ this.variables.getUsuario()+"</NombreDeUsuarioDeEmpresa>"
-    +"<CodigoDeValidacion>10000</CodigoDeValidacion>"
+    //+"<CodigoDeValidacion>10000</CodigoDeValidacion>"
     +"<DescripcionDetalladaDeFalla>00000_ENTER_"+comentarios+"</DescripcionDetalladaDeFalla>"
     +"</SolicitudAseguramiento>"
     +"<DatosControl>"

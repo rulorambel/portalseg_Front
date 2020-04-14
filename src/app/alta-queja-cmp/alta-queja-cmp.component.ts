@@ -231,7 +231,7 @@ console.log (this.generarCadenaFallas());
                       +"<DescripcionDetalladaDeFalla>"+((this.Observaciones.value == null || this.Observaciones.value == '')?'SOLICITUD A REGISTRAR':this.Observaciones.value)+"</DescripcionDetalladaDeFalla>"
                       +"<SeveridadDeLaFalla>"+this.Severidad.value+"</SeveridadDeLaFalla>"
                       +"<CatalogacionDeFalla>"+this.generarCadenaFallas()+"</CatalogacionDeFalla>" 
-                      +"<IdentificadorNISDeServicio>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio>"
+                      +"<IdentificadorNISDeServicio2>"+this.variables.getReferenciaSelecionada()+"</IdentificadorNISDeServicio2>"
                       +"<DatosServicioDeComparticion>"
                       +"<IdentificadorNISDeServicio>"+this.variables.getIdNis()+"</IdentificadorNISDeServicio>"
                           +"<GeolocalizacionLongitud>"+this.variables.getGeoLatitud()+"</GeolocalizacionLongitud>"

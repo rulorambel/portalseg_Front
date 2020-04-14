@@ -401,6 +401,7 @@ console.log (this.generarCadenaFallas());
                       {name: 'Problemas de tráfico de voz'},{name: 'Troncales bloqueadas'}];     
 
     }
+
     else if (this.variables.getTipoServicio() == "AUX" )
     {
       this.Fallas = [ {name: 'Fuera de servicio sin redundancia'},{name: 'Fuera de servicio con redundancia'},
