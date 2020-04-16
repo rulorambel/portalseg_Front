@@ -119,7 +119,9 @@ export class PrincipalComponent {
     this.limpiacomponentes();
     this.step === 1;
     this.setStep(1);
-    
+    if(this.variables.getTipoServicio()  == "INX"){
+        this.altaInx.filtraProblemaReportado();
+    }
   }
 
   cambiarAConsulta(event)

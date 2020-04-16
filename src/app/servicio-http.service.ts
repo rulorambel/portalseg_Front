@@ -403,4 +403,14 @@ consultaSICEG11(parametros:HttpParams)
           .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
 
 }
+
+consultaProblemaReportado(parametros:HttpParams)
+{
+  const httpOptions = new HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('Accept', 'application/json')
+  return  this.http.get<BeanBuscar>("/IfaceSeg2/subcategoria",{headers: httpOptions, params:parametros} )
+          .pipe (retry(this.reenvio) , catchError(this.handleError)) ;
+
+}
 }

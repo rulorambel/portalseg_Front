@@ -54,7 +54,7 @@ CaracteristicaDet:any;
                private dialogRef: MatDialog )
   {
     this.FormularioAlta= this.createFormGroup();
-    this.filtraFallas();
+    this.filtraProblemaReportado();
     this.generarCadenaFallas();
     this.FormularioAlta.get("GeoLatitud").setValue(this.variables.getGeoLatitud());
    }
@@ -238,8 +238,8 @@ console.log (this.generarCadenaFallas());
                           +"<GeolocalizacionLatitud>"+this.variables.getGeoLongitud()+"</GeolocalizacionLatitud>"
                           +"<TipoDeElemento>"+this.variables.getTipoElemento()+"</TipoDeElemento>"
                           +"<IdentificadorElemento>"+this.variables.getIdElemento()+"</IdentificadorElemento>"
-                      +"</DatosServicioDeComparticion>"
-                      +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
+                    +"</DatosServicioDeComparticion>"
+                    +"<DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<Origen1></Origen1>"
                       +"<Destino1></Destino1>"
                       +"<Origen2></Origen2>"
@@ -253,6 +253,10 @@ console.log (this.generarCadenaFallas());
                       +"<CIC></CIC>"
                       +"<CentralOrigenOCPIP></CentralOrigenOCPIP>"
                       +"<CentralDestinoDCPIP></CentralDestinoDCPIP>"
+                      +"<OperadorOrigenIDO></OperadorOrigenIDO>"
+                      +"<OperadorDestinoIDD></OperadorDestinoIDD>"
+                      +"<CiudadOrigenNIR></CiudadOrigenNIR>"
+                      +"<CiudadDestinoNIR></CiudadDestinoNIR>"
                   +"</DatosServicioDeInterconexion-Trafico-Portabilidad>"
                       +"<FallaMasiva></FallaMasiva>"
                       +"<Prioridad>"+this.Severidad.value+"</Prioridad>"
@@ -387,59 +391,43 @@ console.log (this.generarCadenaFallas());
 
 
 /**************************************************************************************  
-*  Muestra en el campo Problema Reportado las fallas de acuedo al tipo de Servicio
+*  Muestra en el campo Problema Reportado las fallas de acuedo al tipo de Servicio usando WS
 *
-*   @Author:		RuloRamBel
-*   @Date:		  11/11/2019
-*   @update:    11/11/2019  
+*   @Author:		Anahi Flores/Josue Rubio
+*   @Date:		  16/04/2020
+*   @update:    16/04/2020 
 *   @Version:   1.0
-*   @Funcion    filtraFallas
+*   @Funcion    filtraProblemaReportado
 *  	@param:		  
 *-------------------------------------------------------------------------------------
 *   @return:     
 *
 **************************************************************************************/
- private filtraFallas()
- {
-    if(this.variables.getTipoServicio() == "LE" )
-    {
-      this.Fallas = [ {name: 'Fuera de servicio sin redundancia'},{name: 'Fuera de servicio con redundancia'},
-                      {name: 'Cortes'},{name: 'Errores'},
-                      {name: 'Degradación del servicio'},{name: 'Asistencia a pruebas'}]; 
-      
-                          
-    }
-    else if (this.variables.getTipoServicio() == "INX" )
-    {
-      this.Fallas = [ {name: 'Fuera de servicio sin redundancia'}, {name: 'Fuera de servicio con redundancia'},
-                      {name: 'Cortes'},{name: 'Errores'},
-                      {name: 'Degradación del servicio'},{name: 'Asistencia a pruebas'},
-                      {name: 'Problemas de tráfico de voz'},{name: 'Troncales bloqueadas'}];     
+public filtraProblemaReportado() {
+  let parametro: string = "";
+  if (this.variables.getTipoServicio() == "INX") {
+    parametro = "\"" + this.variables.getTipoInx().replace(/,/g, "\",\"") + "\"";
+  }
 
-    }
-    else if (this.variables.getTipoServicio() == "AUX" )
-    {
-      this.Fallas = [ {name: 'Fuera de servicio sin redundancia'},{name: 'Fuera de servicio con redundancia'},
-                      {name: 'Cortes'},{name: 'Errores'},
-                      {name: 'Degradación del servicio'},{name: 'Asistencia a pruebas'},
-                      {name: 'Problemas de tráfico de voz'},{name: 'Soporte primer nivel'}];
+  let parametros = new HttpParams()
+    .set("tiposerv", "\"" + this.variables.getTipoServicio() + "\"")
+    .set("subcategoria", parametro)
+    .set("fallarep", "")
 
-    }
-    else if (this.variables.getTipoServicio() == "CMP" )
-    {
-      this.Fallas = [ {name: 'Asistencia a pruebas'}];
-
-    }
-   
+  this.servhttp.consultaProblemaReportado(parametros)
+    .subscribe(data => {
+      if (data["codigo"] == "0") {
+        this.Fallas = data["data"]
+      }
+    })
 }
-
-
+ 
 /**************************************************************************************  
-*  Muestra lista de valores del campo Caracteristica detallada  de acuedo al campo Problema Reportado
+*  Muestra lista de valores del campo Caracteristica Detallada  de acuedo al campo Problema Reportado
 *
-*   @Author:		Anahi Flores
+*   @Author:		Anahi Flores/Josue Rubio
 *   @Date:		  09/01/2020
-*   @update:    13/01/2020
+*   @update:    16/04/2020
 *   @Version:   1.0
 *   @Funcion    filtraCaracteristicaDet
 *  	@param:		  
@@ -447,50 +435,37 @@ console.log (this.generarCadenaFallas());
 *   @return:     
 *
 **************************************************************************************/ 
-public filtraCaracteristicaDet(evento)
-
-{
+public filtraCaracteristicaDet(evento) {
   console.log("filtraCaracteristicaDet");
-  console.log (evento);
-  console.log (this.Catalogacion);
+  console.log(evento);
+  console.log(this.Catalogacion);
 
-  this.CaracteristicaDet =[{}];
+  this.CaracteristicaDet = [{}];
   this.CaracteristicaDesobligatoria();
   this.Caracteristica.setValue("");
+  let parametro: string = "";
 
-
-   if(evento == "Fuera de servicio sin redundancia")
-
-   {
-     this.CaracteristicaDet = [ {name: 'Daño en equipo'},{name: 'Daño en infraestructura'},
-                     {name: 'Módem / NTU / Demarcador'},{name: 'Sin servicio'},]; 
-      this.CaracteristicaObligatoria();
-     
-    }
-    else if (evento == "Fuera de servicio con redundancia" )
-    {
-      this.CaracteristicaDet = [ {name: 'Daño en equipo'},{name: 'Daño en infraestructura'},
-      {name: 'Módem / NTU / Demarcador'},{name: 'Sin servicio'},];
-      this.CaracteristicaObligatoria();
-     
-    }
-    else if (evento == "Degradación del servicio" )
-    {
-      this.CaracteristicaDet = [ {name: 'Lentitud'},{name: 'No alcanza el ancho de banda'},
-      {name: 'Pérdida de paquetes'},];
-      this.CaracteristicaObligatoria();
-     
-    }
-
-    else if (evento == "Asistencia a pruebas")
-    {
-      this.CaracteristicaDet = [ {name: 'Acceso por falla'},{name: 'Histórico de alarmas'},
-      {name: 'Monitoreo'}, {name: 'Pruebas conjuntas'},];
-      this.CaracteristicaObligatoria();
-     
-    }
-
+  if (this.variables.getTipoServicio() == "INX") {
+    parametro = "\"" + this.variables.getTipoInx().replace(/,/g, "\",\"") + "\"";
   }
+
+  let parametros = new HttpParams()
+    .set("tiposerv", "\"" + this.variables.getTipoServicio() + "\"")
+    .set("subcategoria", parametro)
+    .set("fallarep", "\"" + evento + "\"")
+
+  this.servhttp.consultaProblemaReportado(parametros)
+    .subscribe(data => {
+      if (data["codigo"] == "0") {
+        this.CaracteristicaDet = data["data"]
+
+        if (this.CaracteristicaDet.length > 0) {
+          this.CaracteristicaObligatoria();
+        }
+      }
+    })
+
+}
 
 /**************************************************************************************  
 *  Función que convierte a Caracteristica Detallada en requerida

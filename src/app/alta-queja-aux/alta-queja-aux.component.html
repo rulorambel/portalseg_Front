@@ -46,8 +46,8 @@
                           <mat-form-field style="width: 93%;"> 
                               <mat-select  #lselCatalogacion formControlName="Catalogacion" (selectionChange) ="filtraCaracteristicaDet($event.value)">
                                 <mat-option>-Seleccionar falla-</mat-option>
-                                <mat-option *ngFor="let falla of Fallas" [value]="falla.name">
-                                        {{falla.name}}
+                                <mat-option *ngFor="let falla of Fallas" [value]="falla.fallaReportada">
+                                        {{falla.fallaReportada}}
                                         </mat-option>
                               </mat-select>
                             </mat-form-field>
@@ -61,8 +61,8 @@
                           <mat-form-field style="width: 93%;"> 
                               <mat-select  #lselCaracteristica formControlName="Caracteristica" >
                                 <mat-option>-Seleccionar Caracteristica-</mat-option>
-                                <mat-option *ngFor="let item of CaracteristicaDet" [value]="item.name">
-                                        {{item.name}}
+                                <mat-option *ngFor="let item of CaracteristicaDet" [value]="item.tipoServicio">
+                                        {{item.tipoServicio}}
                                         </mat-option>
                               </mat-select>
                             </mat-form-field>
