@@ -342,14 +342,14 @@ public enviaActualizacion(objtxt , objchk)
       let movimiento:string ;
       let strXML:string  ;
 
-      //if (tipoMov==true){
+      if (tipoMov==true){
          movimiento="RespuestaValidaCierreQueja";
          strXML = this.formaXMLActualizacionValidacion(comentario);
-      /*}
+      }
       else {
         movimiento = "SolicitudActualizaQueja";
         strXML = this.formaXMLActualizacionBitacora(comentario);
-      }*/
+      }
       let parametros = new HttpParams()
       .set("mov",movimiento)
       .set("param",strXML);
@@ -411,7 +411,7 @@ public enviaActualizacion(objtxt , objchk)
           +"<IdentificadorDeQueja>"+this.lblQueja+"</IdentificadorDeQueja>"
           +"<NombreDeUsuarioDeEmpresa>"+this.variables.getUsuario()+"</NombreDeUsuarioDeEmpresa>"
           +"<DescripcionDetalladaDeFalla>00000_ENTER_"+comentarios+"</DescripcionDetalladaDeFalla>"
-          +"<EsAcuseDeLeido>ACUSE</EsAcuseDeLeido>"
+          +"<EsAcuseDeLeido>MENSAJE</EsAcuseDeLeido>"
           +"</SolicitudAseguramiento>"
           +"<DatosControl>"
           +"<IdCorrelacion>"+this.getIDCorre()+"</IdCorrelacion>"
@@ -441,8 +441,8 @@ public enviaActualizacion(objtxt , objchk)
     +"<SolicitudAseguramiento>"
     +"<IdentificadorDeQueja>"+this.lblQueja+"</IdentificadorDeQueja>"
     +"<NombreDeUsuarioDeEmpresa>"+ this.variables.getUsuario()+"</NombreDeUsuarioDeEmpresa>"
+    +"<CodigoDeValidacion>10000</CodigoDeValidacion>"
     +"<DescripcionDetalladaDeFalla>00000_ENTER_"+comentarios+"</DescripcionDetalladaDeFalla>"
-    +"<EsAcuseDeLeido>MENSAJE</EsAcuseDeLeido>"
     +"</SolicitudAseguramiento>"
     +"<DatosControl>"
     +"<IdCorrelacion>"+this.getIDCorre()+"</IdCorrelacion>"
@@ -529,7 +529,7 @@ public enviaActualizacion(objtxt , objchk)
     this.Bitacora.sort();
     console.log("entro a la funcion acuse de recibo");
     this.Bitacora.forEach(i => {
-      if(i.acuse==false /*&& i.tipoActualizacion== "Comunicación concesionario"*/)
+      if(i.acuse==false && (i.tipoActualizacion== "Comunicación concesionario" || i.tipoActualizacion== "Cambio de Estatus Global"))
       {
         let movimiento:string ;
         let strXML:string  ;
